@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
@@ -19,6 +18,7 @@
                     <li>@Html.ActionLink("Datie Data Manager", "Index", "Datie")</li>
                     <li>@Html.ActionLink("Account Manager", "About", "Home")</li>
                     <li>@Html.ActionLink("About", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("tesst Data", "GetData", "Datie")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +34,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/Datatable")
+    @Scripts.Render("~/bundles/Datatables")
     @RenderSection("scripts", required: false)
 </body>
 </html>
