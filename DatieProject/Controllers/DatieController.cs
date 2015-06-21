@@ -15,6 +15,10 @@ namespace DatieProject.Controllers
             return View();
         }
 
+        public PartialViewResult AddShop()
+        {
+            return PartialView();
+        }
         public JsonResult GetData()
         {
             var data = _datieDb.tbl_Shop.ToList();
