@@ -16,7 +16,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Datie Data Manager", "Index", "Datie")</li>
-                    <li>@Html.ActionLink("Account Manager", "About", "Home")</li>
+                    <li>@Html.ActionLink("Account Manager", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -34,6 +34,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/Datatables")
+    @Scripts.Render("~/bundles/blockUI")
+    @Scripts.Render("~/bundles/bootbox")
+    @Scripts.Render("~/bundles/numberic")
     @RenderSection("scripts", required: false)
 </body>
 </html>

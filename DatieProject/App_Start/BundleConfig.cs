@@ -17,7 +17,12 @@ namespace DatieProject
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-
+            bundles.Add(new ScriptBundle("~/bundles/blockUI").Include(
+                       "~/Scripts/jquery.blockUI.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
+                      "~/Scripts/bootbox.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/numberic").Include(
+              "~/Scripts/jquery.numeric.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/Bootstrap/bootstrap.js",
                       "~/Scripts/Bootstrap/respond.js"));

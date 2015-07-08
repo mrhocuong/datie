@@ -196,6 +196,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\FoodModel.cs" />
+    <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\DatieModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -280,10 +283,12 @@
     <Content Include="Content\DataTables\images\xls_hover.png" />
     <Content Include="Content\DataTables\swf\copy_csv_xls.swf" />
     <Content Include="Content\DataTables\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <EntityDeploy Include="DatieDB.edmx">
@@ -331,6 +336,10 @@
     <Content Include="Scripts\Datatables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Datatables\jquery.js" />
     <Content Include="Scripts\Datie\datie.js" />
+    <Content Include="Scripts\Home\home.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.numeric.js" />
+    <Content Include="Scripts\jquery.numeric.min.js" />
     <Content Include="Scripts\Jquery\jquery-1.10.2.js" />
     <Content Include="Scripts\Jquery\jquery-1.10.2.min.js" />
     <None Include="Scripts\Jquery\jquery.validate-vsdoc.js" />
@@ -372,6 +381,7 @@
     <Content Include="Views\Datie\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Datie\AddShop.cshtml" />
+    <Content Include="Views\Datie\EditShop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

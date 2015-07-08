@@ -1,6 +1,6 @@
 ﻿@model DatieProject.Models.DatieModel
 
-<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="height: 640px">
             <div class="modal-header">
@@ -9,8 +9,11 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Edit Shop Detail</h4>
             </div>
-            <fieldset id="addForm">
+            <fieldset id="editForm">
                 <div class="modal-body" style="height: 500px">
+                    <div class="editor-field">
+                        @Html.TextBoxFor(x => x.ShopId, new { @type = "hidden" })
+                    </div>
                     <div class="form-control-manual">
                         <div class="edit-label">
                             <label for="ShopName">Name</label>
@@ -61,6 +64,14 @@
                     </div>
                     <div class="form-control-manual">
                         <div class="edit-label">
+                            <label for="ShopRate">Rate</label>
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(x => x.ShopRate, new { @style = "width: 400px", @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="form-control-manual">
+                        <div class="edit-label">
                             <label for="ShopDescription">Description</label>
                         </div>
                         <div class="editor-field">
@@ -75,10 +86,25 @@
                             @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new { @style = "width: 400px", @class = "form-control" })
                         </div>
                     </div>
+                    <div class="form-control-manual">
+                        <div class="edit-label" style="width: 122px">
+                            <label>IsDelete</label>
+                        </div>
+                        <div>
+                            @if (Model.ShopIsDeleted)
+                            {
+                                <input type="checkbox" id="ShopIsDeleted" checked="checked" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="ShopIsDeleted" />
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
+                    <button type="button" class="btn btn-primary" onclick=" Edit(this, event) " data-id="@Model.ShopId">Update</button>
                 </div>
             </fieldset>
         </div>

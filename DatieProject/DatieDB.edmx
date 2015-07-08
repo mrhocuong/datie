@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatieDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatieDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_Comment">
           <Key>
             <PropertyRef Name="id_cmt" />
@@ -74,6 +74,7 @@
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="reg_date" Type="date" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
         </EntityType>
         <Association Name="FK_tbl_Comment_tbl_Shop">
           <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
@@ -196,8 +197,7 @@
             <End Role="tbl_Shop" EntitySet="tbl_Shop" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatieDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -211,7 +211,7 @@
           <Property Name="date_cmt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Comment_tbl_Shop" FromRole="tbl_Comment" ToRole="tbl_Shop" />
-          <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_Comment_tbl_User" FromRole="tbl_Comment" ToRole="tbl_User" />
+          <NavigationProperty Name="tbl_User" Relationship="DatieDBModel.FK_tbl_Comment_tbl_User" FromRole="tbl_Comment" ToRole="tbl_User" />
         </EntityType>
         <EntityType Name="tbl_District">
           <Key>
@@ -249,7 +249,7 @@
           <Property Name="usename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rate" Type="Double" Nullable="false" />
           <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Rate_tbl_Shop" FromRole="tbl_Rate" ToRole="tbl_Shop" />
-          <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_Rate_tbl_User" FromRole="tbl_Rate" ToRole="tbl_User" />
+          <NavigationProperty Name="tbl_User" Relationship="DatieDBModel.FK_tbl_Rate_tbl_User" FromRole="tbl_Rate" ToRole="tbl_User" />
         </EntityType>
         <EntityType Name="tbl_Shop">
           <Key>
@@ -274,17 +274,6 @@
           <NavigationProperty Name="tbl_Main_Course" Relationship="Self.FK_tbl_Shop_tbl_Main_Course" FromRole="tbl_Shop" ToRole="tbl_Main_Course" />
           <NavigationProperty Name="tbl_Rate" Relationship="Self.FK_tbl_Rate_tbl_Shop" FromRole="tbl_Shop" ToRole="tbl_Rate" />
         </EntityType>
-        <EntityType Name="tbl_User">
-          <Key>
-            <PropertyRef Name="username" />
-          </Key>
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="reg_date" Type="DateTime" Precision="0" />
-          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="tbl_Comment" Relationship="Self.FK_tbl_Comment_tbl_User" FromRole="tbl_User" ToRole="tbl_Comment" />
-          <NavigationProperty Name="tbl_Rate" Relationship="Self.FK_tbl_Rate_tbl_User" FromRole="tbl_User" ToRole="tbl_Rate" />
-        </EntityType>
         <Association Name="FK_tbl_Comment_tbl_Shop">
           <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
           <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
@@ -294,18 +283,6 @@
             </Principal>
             <Dependent Role="tbl_Comment">
               <PropertyRef Name="id_shop" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbl_Comment_tbl_User">
-          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
-          <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_User">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="tbl_Comment">
-              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -357,18 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_Rate_tbl_User">
-          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
-          <End Role="tbl_Rate" Type="Self.tbl_Rate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_User">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="tbl_Rate">
-              <PropertyRef Name="usename" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DatieDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_Comment" EntityType="Self.tbl_Comment" />
           <EntitySet Name="tbl_District" EntityType="Self.tbl_District" />
@@ -376,13 +341,8 @@
           <EntitySet Name="tbl_Main_Course" EntityType="Self.tbl_Main_Course" />
           <EntitySet Name="tbl_Rate" EntityType="Self.tbl_Rate" />
           <EntitySet Name="tbl_Shop" EntityType="Self.tbl_Shop" />
-          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
           <AssociationSet Name="FK_tbl_Comment_tbl_Shop" Association="Self.FK_tbl_Comment_tbl_Shop">
             <End Role="tbl_Shop" EntitySet="tbl_Shop" />
-            <End Role="tbl_Comment" EntitySet="tbl_Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbl_Comment_tbl_User" Association="Self.FK_tbl_Comment_tbl_User">
-            <End Role="tbl_User" EntitySet="tbl_User" />
             <End Role="tbl_Comment" EntitySet="tbl_Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_tbl_Shop_tbl_District" Association="Self.FK_tbl_Shop_tbl_District">
@@ -401,11 +361,52 @@
             <End Role="tbl_Shop" EntitySet="tbl_Shop" />
             <End Role="tbl_Rate" EntitySet="tbl_Rate" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_Rate_tbl_User" Association="Self.FK_tbl_Rate_tbl_User">
+          <EntitySet Name="tbl_User" EntityType="DatieDBModel.tbl_User" />
+          <AssociationSet Name="FK_tbl_Comment_tbl_User" Association="DatieDBModel.FK_tbl_Comment_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Rate_tbl_User" Association="DatieDBModel.FK_tbl_Rate_tbl_User">
             <End Role="tbl_User" EntitySet="tbl_User" />
             <End Role="tbl_Rate" EntitySet="tbl_Rate" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reg_date" Type="DateTime" Precision="0" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tbl_Comment" Relationship="DatieDBModel.FK_tbl_Comment_tbl_User" FromRole="tbl_User" ToRole="tbl_Comment" />
+          <NavigationProperty Name="tbl_Rate" Relationship="DatieDBModel.FK_tbl_Rate_tbl_User" FromRole="tbl_User" ToRole="tbl_Rate" />
+        </EntityType>
+        <Association Name="FK_tbl_Comment_tbl_User">
+          <End Type="DatieDBModel.tbl_User" Role="tbl_User" Multiplicity="1" />
+          <End Type="DatieDBModel.tbl_Comment" Role="tbl_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tbl_Comment">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Rate_tbl_User">
+          <End Type="DatieDBModel.tbl_User" Role="tbl_User" Multiplicity="1" />
+          <End Type="DatieDBModel.tbl_Rate" Role="tbl_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tbl_Rate">
+              <PropertyRef Name="usename" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -482,10 +483,11 @@
           <EntitySetMapping Name="tbl_User">
             <EntityTypeMapping TypeName="DatieDBModel.tbl_User">
               <MappingFragment StoreEntitySet="tbl_User">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

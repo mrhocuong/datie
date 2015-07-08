@@ -11,14 +11,14 @@
         <EntityTypeShape EntityType="DatieDBModel.tbl_Main_Course" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="DatieDBModel.tbl_Rate" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DatieDBModel.tbl_Shop" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatieDBModel.tbl_User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="DatieDBModel.FK_tbl_Comment_tbl_Shop" ManuallyRouted="false" />
-        <AssociationConnector Association="DatieDBModel.FK_tbl_Comment_tbl_User" ManuallyRouted="false" />
         <AssociationConnector Association="DatieDBModel.FK_tbl_Shop_tbl_District" ManuallyRouted="false" />
         <AssociationConnector Association="DatieDBModel.FK_tbl_Image_tbl_Shop" ManuallyRouted="false" />
         <AssociationConnector Association="DatieDBModel.FK_tbl_Shop_tbl_Main_Course" ManuallyRouted="false" />
         <AssociationConnector Association="DatieDBModel.FK_tbl_Rate_tbl_Shop" ManuallyRouted="false" />
-        <AssociationConnector Association="DatieDBModel.FK_tbl_Rate_tbl_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatieDBModel.tbl_User" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="DatieDBModel.FK_tbl_Comment_tbl_User" />
+        <AssociationConnector Association="DatieDBModel.FK_tbl_Rate_tbl_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
