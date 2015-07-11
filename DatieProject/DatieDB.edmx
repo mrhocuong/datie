@@ -74,7 +74,8 @@
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="reg_date" Type="date" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
-          <Property Name="isActive" Type="bit" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="admin_master" Type="bit" />
         </EntityType>
         <Association Name="FK_tbl_Comment_tbl_Shop">
           <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
@@ -370,7 +371,7 @@
             <End Role="tbl_User" EntitySet="tbl_User" />
             <End Role="tbl_Rate" EntitySet="tbl_Rate" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="tbl_User">
           <Key>
             <PropertyRef Name="username" />
@@ -379,7 +380,8 @@
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="reg_date" Type="DateTime" Precision="0" />
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
-          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="admin_master" Type="Boolean" />
           <NavigationProperty Name="tbl_Comment" Relationship="DatieDBModel.FK_tbl_Comment_tbl_User" FromRole="tbl_User" ToRole="tbl_Comment" />
           <NavigationProperty Name="tbl_Rate" Relationship="DatieDBModel.FK_tbl_Rate_tbl_User" FromRole="tbl_User" ToRole="tbl_Rate" />
         </EntityType>
@@ -407,7 +409,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -483,6 +485,7 @@
           <EntitySetMapping Name="tbl_User">
             <EntityTypeMapping TypeName="DatieDBModel.tbl_User">
               <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="admin_master" ColumnName="admin_master" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
                 <ScalarProperty Name="reg_date" ColumnName="reg_date" />

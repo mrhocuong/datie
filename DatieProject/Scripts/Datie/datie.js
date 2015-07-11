@@ -20,13 +20,13 @@
                 if (data.ShopIsDeleted) {
                     return "Deleted";
                 } else {
-                    return "";
+                    return "None";
                 }
             }
         },
             {
                 "data": function (data, type, full, meta) {
-                    return ' <button id="btnEdit" class="btn btn-primary" onclick="EditShop(this, event)" data-id="' + data.ShopId + '" class="glyphicon glyphicon-edit">Edit</button>';
+                    return ' <button id="btnEdit" class="btn btn-danger" onclick="EditShop(this, event)" data-id="' + data.ShopId + '" class="glyphicon glyphicon-edit">Edit</button>';
                 }
             }
         ],

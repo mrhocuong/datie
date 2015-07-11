@@ -2,7 +2,7 @@
 
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" style="height: 640px">
+        <div class="modal-content" style="height: 570px">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -10,13 +10,13 @@
                 <h4 class="modal-title" id="myModalLabel">Edit Shop Detail</h4>
             </div>
             <fieldset id="addForm">
-                <div class="modal-body" style="height: 500px">
+                <div class="modal-body" style="height: 430px">
                     <div class="form-control-manual">
                         <div class="edit-label">
                             <label for="ShopName">Name</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopName, new { @style = "width: 400px", @class = "form-control" })
+                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -24,7 +24,7 @@
                             <label for="ShopAddress">Address</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopAddress, new { @style = "width: 400px", @class = "form-control" })
+                            @Html.TextBoxFor(x => x.ShopAddress, new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -32,7 +32,7 @@
                             <label for="ShopPhone">Phone</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopPhone, new { @style = "width: 400px", @class = "form-control numeric" })
+                            @Html.TextBoxFor(x => x.ShopPhone, new {@style = "width:400px", @class = "form-control numeric"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -40,7 +40,7 @@
                             <label for="DistrictId">District</label>
                         </div>
                         <div class="editor-field">
-                            @Html.DropDownListFor(x => x.DistrictId, new SelectList(Model.DistrictList, "DistrictId", "DistrictName"), new { @style = "width: 400px", @class = "form-control" })
+                            @Html.DropDownListFor(x => x.DistrictId, new SelectList(Model.DistrictList, "DistrictId", "DistrictName"), new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -48,7 +48,7 @@
                             <label for="ShopPriceMid">Price Mid (VND)</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopPriceMid, new { @style = "width: 400px", @class = "form-control numeric" })
+                            @Html.TextBoxFor(x => x.ShopPriceMid, new {@style = "width:400px", @class = "form-control numeric"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -56,7 +56,7 @@
                             <label for="ShopTimeMid">Time Mid (H)</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopTimeMid, new { @style = "width: 400px", @class = "form-control numeric" })
+                            @Html.TextBoxFor(x => x.ShopTimeMid, new {@style = "width:400px", @class = "form-control numeric"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -64,7 +64,7 @@
                             <label for="ShopDescription">Description</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(x => x.ShopDescription, new { @style = "width: 400px; height: 120px", @class = "form-control" })
+                            @Html.TextAreaFor(x => x.ShopDescription, new {@style = "height:120px;width:400px;", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -72,8 +72,15 @@
                             <label for="FoodId">Main Course</label>
                         </div>
                         <div class="editor-field">
-                            @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new { @style = "width: 400px", @class = "form-control" })
+                            @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new {@style = "width:400px", @class = "form-control"})
                         </div>
+                    </div>
+                    <div class="form-control-manual">
+                        <h1>Upload Your Images</h1>
+                        <form method="post" enctype="multipart/form-data" action="upload.php">
+                            <input type="file" name="images" id="images" multiple/>
+                            <button type="submit" id="btn">Upload Files!</button>
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">

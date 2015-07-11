@@ -12,14 +12,14 @@
             <fieldset id="editForm">
                 <div class="modal-body" style="height: 500px">
                     <div class="editor-field">
-                        @Html.TextBoxFor(x => x.ShopId, new { @type = "hidden" })
+                        @Html.TextBoxFor(x => x.ShopId, new {@type = "hidden"})
                     </div>
                     <div class="form-control-manual">
                         <div class="edit-label">
                             <label for="ShopName">Name</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopName, new { @style = "width: 400px", @class = "form-control" })
+                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -27,7 +27,7 @@
                             <label for="ShopAddress">Address</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopAddress, new { @style = "width: 400px", @class = "form-control" })
+                            @Html.TextBoxFor(x => x.ShopAddress, new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -35,7 +35,7 @@
                             <label for="ShopPhone">Phone</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopPhone, new { @style = "width: 400px", @class = "form-control numeric" })
+                            @Html.TextBoxFor(x => x.ShopPhone, new {@style = "width:400px", @class = "form-control numeric"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -43,7 +43,7 @@
                             <label for="DistrictId">District</label>
                         </div>
                         <div class="editor-field">
-                            @Html.DropDownListFor(x => x.DistrictId, new SelectList(Model.DistrictList, "DistrictId", "DistrictName"), new { @style = "width: 400px", @class = "form-control" })
+                            @Html.DropDownListFor(x => x.DistrictId, new SelectList(Model.DistrictList, "DistrictId", "DistrictName"), new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -51,7 +51,7 @@
                             <label for="ShopPriceMid">Price Mid (VND)</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopPriceMid, new { @style = "width: 400px", @class = "form-control numeric" })
+                            @Html.TextBoxFor(x => x.ShopPriceMid, new {@style = "width:400px", @class = "form-control numeric"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -59,7 +59,7 @@
                             <label for="ShopTimeMid">Time Mid (H)</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopTimeMid, new { @style = "width: 400px", @class = "form-control numeric" })
+                            @Html.TextBoxFor(x => x.ShopTimeMid, new {@style = "width:400px", @class = "form-control numeric"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -67,7 +67,7 @@
                             <label for="ShopRate">Rate</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopRate, new { @style = "width: 400px", @class = "form-control", @disabled = "disabled" })
+                            @Html.TextBoxFor(x => x.ShopRate, new {@style = "width:400px", @class = "form-control", @disabled = "disabled"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -75,7 +75,7 @@
                             <label for="ShopDescription">Description</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(x => x.ShopDescription, new { @style = "width: 400px; height: 120px", @class = "form-control" })
+                            @Html.TextAreaFor(x => x.ShopDescription, new {@style = "height:120px;width:400px;", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -83,7 +83,7 @@
                             <label for="FoodId">Main Course</label>
                         </div>
                         <div class="editor-field">
-                            @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new { @style = "width: 400px", @class = "form-control" })
+                            @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -93,11 +93,11 @@
                         <div>
                             @if (Model.ShopIsDeleted)
                             {
-                                <input type="checkbox" id="ShopIsDeleted" checked="checked" />
+                                <input type="checkbox" id="ShopIsDeleted" checked="checked"/>
                             }
                             else
                             {
-                                <input type="checkbox" id="ShopIsDeleted" />
+                                <input type="checkbox" id="ShopIsDeleted"/>
                             }
                         </div>
                     </div>

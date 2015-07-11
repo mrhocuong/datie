@@ -1,7 +1,26 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model DatieProject.Models.LoginViewModel
 
-<p>Use this area to provide additional information.</p>
+@{
+    ViewBag.Title = "HomePage";
+}
+
+<div class="container body-content" style="margin-top: 30px;">
+    <table id="table" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Reg Date</th>
+                <th>isAdmin</th>
+                <th>Status</th>
+                <th width="35px"></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div id="dialog"></div>
+
+@section Scripts {
+    <script src="~/Scripts/Home/home.js"></script>
+}

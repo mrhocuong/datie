@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     window.dt = $("#table").DataTable({
         "ajax": {
-            "url": "Home/GetData",
+            "url": "User/GetData",
             "type": "POST",
             "dataType": "json",
             "data": "data",
@@ -47,11 +47,30 @@ function Active(btn, event) {
     var id = $(btn).data('id');
     var status = $(btn).data('status');
     $.ajax({
-        url: 'Home/ChangeStatus',
+        url: 'User/ChangeStatus',
         type: 'POST',
         data: { id: id, status: status },
+        beforeSend: function () {
+            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+        },
         success: function (data) {
-            dt.ajax.reload(null, false);
+            if (data.success==false) {
+                bootbox.dialog({
+                    message: "You do not have permission.",
+                    title: "Message",
+                    buttons: {
+                        success: {
+                            label: "Close",
+                            className: "btn btn-primary"
+                        }
+                    }
+                });
+            } else {
+                dt.ajax.reload(null, false);
+            }
+        },
+        complete: function () {
+            $.unblockUI();
         }
     });
 }

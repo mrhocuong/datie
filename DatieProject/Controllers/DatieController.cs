@@ -19,6 +19,7 @@ namespace DatieProject.Controllers
         }
 
         #region Add
+
         public PartialViewResult AddShop()
         {
             var model = new DatieModel();
@@ -50,25 +51,27 @@ namespace DatieProject.Controllers
                 var check = _datieDb.SaveChanges();
                 if (check > 0)
                 {
-                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                    return Json(new {success = true}, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = false}, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
         #region Edit
+
         public PartialViewResult EditShop(int id)
         {
             var data = CreateModel(id);
             return PartialView(data);
         }
-       
+
         [HttpPost]
         public JsonResult EditShop(DatieModel model)
         {
             var data = _datieDb.tbl_Shop.ToList().Find(x => x.id_shop.ToString() == model.ShopId);
-            if (data!=null)
+            if (data != null)
             {
                 data.name = model.ShopName;
                 data.address = model.ShopAddress;
@@ -82,16 +85,18 @@ namespace DatieProject.Controllers
                 data.isDelete = model.ShopIsDeleted;
                 _datieDb.Entry(data).State = EntityState.Modified;
                 var check = _datieDb.SaveChanges();
-                if (check>0)
+                if (check > 0)
                 {
-                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-                }            
+                    return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+                }
             }
             return Json(new {success = false}, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
         #region Get Data
+
         public JsonResult GetData()
         {
             var data = _datieDb.tbl_Shop.ToList();
@@ -113,7 +118,7 @@ namespace DatieProject.Controllers
                 dt.Add(tmp);
             });
 
-            return Json(new {data = dt.OrderBy(x=>x.ShopId)}, JsonRequestBehavior.AllowGet);
+            return Json(new {data = dt.OrderBy(x => x.ShopId)}, JsonRequestBehavior.AllowGet);
         }
 
         public DatieModel CreateModel(int id)
@@ -121,7 +126,7 @@ namespace DatieProject.Controllers
             var tmpData = _datieDb.tbl_Shop.ToList().Find(x => x.id_shop == id);
             var district = GetDistrictModels();
             var food = GetFoodModels();
-            var model = new DatieModel()
+            var model = new DatieModel
             {
                 ShopId = tmpData.id_shop.ToString(),
                 ShopAddress = tmpData.address,
@@ -146,7 +151,7 @@ namespace DatieProject.Controllers
             var district = new List<DistrictModel>();
             data.ForEach(x =>
             {
-                var tmp = new DistrictModel()
+                var tmp = new DistrictModel
                 {
                     DistrictId = x.id_district,
                     DistrictName = x.district
@@ -162,7 +167,7 @@ namespace DatieProject.Controllers
             var food = new List<FoodModel>();
             data.ForEach(x =>
             {
-                var tmp = new FoodModel()
+                var tmp = new FoodModel
                 {
                     FoodId = x.id_food,
                     FoodName = x.name_food
@@ -171,6 +176,7 @@ namespace DatieProject.Controllers
             });
             return food;
         }
+
         #endregion
     }
 }
