@@ -65,9 +65,13 @@ function Edit(btn, event) {
         url: 'Datie/EditShop',
         type: 'POST',
         data: model,
+        beforeSend: function () {
+            $("#EditModal").modal("hide");
+            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+        },
         success: function (data) {
+            $.unblockUI();
             if (data.success) {
-                $("#EditModal").modal("hide");
                 bootbox.dialog({
                     message: "Edit data success.",
                     title: "Message",
@@ -85,7 +89,10 @@ function Edit(btn, event) {
                     buttons: {
                         success: {
                             label: "Close",
-                            className: "btn btn-primary"
+                            className: "btn btn-primary",
+                            callback:function() {
+                                $("#EditModal").modal("show");
+                            }
                         }
                     }
                 });
@@ -119,9 +126,13 @@ function Add(btn, event) {
         url: 'Datie/Add',
         type: 'POST',
         data: model,
+        beforeSend: function () {
+            $("#AddModal").modal("hide");
+            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+        },
         success: function (data) {
+            $.unblockUI();
             if (data.success) {
-                $("#AddModal").modal("hide");
                 bootbox.dialog({
                     message: "Create new shop success.",
                     title: "Message",
@@ -139,7 +150,10 @@ function Add(btn, event) {
                     buttons: {
                         success: {
                             label: "Close",
-                            className: "btn btn-primary"
+                            className: "btn btn-primary",
+                            callback: function () {
+                                $("#AddModal").modal("show");
+                            }
                         }
                     }
                 });

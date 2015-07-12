@@ -75,7 +75,7 @@
           <Property Name="reg_date" Type="date" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
-          <Property Name="admin_master" Type="bit" />
+          <Property Name="admin_master" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_tbl_Comment_tbl_Shop">
           <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
@@ -381,7 +381,7 @@
           <Property Name="reg_date" Type="DateTime" Precision="0" />
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
-          <Property Name="admin_master" Type="Boolean" />
+          <Property Name="admin_master" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_Comment" Relationship="DatieDBModel.FK_tbl_Comment_tbl_User" FromRole="tbl_User" ToRole="tbl_Comment" />
           <NavigationProperty Name="tbl_Rate" Relationship="DatieDBModel.FK_tbl_Rate_tbl_User" FromRole="tbl_User" ToRole="tbl_Rate" />
         </EntityType>

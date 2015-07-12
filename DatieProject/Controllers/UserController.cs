@@ -22,14 +22,17 @@ namespace DatieProject.Controllers
             var dt = new List<UserModel>();
             data.ForEach(x =>
             {
-                var tmp = new UserModel
+                if (x.admin_master==false)
                 {
-                    Username = x.username,
-                    RegDate = x.reg_date.ToString(),
-                    IsAdmin = x.isAdmin,
-                    IsActive = x.isActive
-                };
-                dt.Add(tmp);
+                    var tmp = new UserModel
+                    {
+                        Username = x.username,
+                        RegDate = x.reg_date.ToString(),
+                        IsAdmin = x.isAdmin,
+                        IsActive = x.isActive
+                    };
+                    dt.Add(tmp);
+                }
             });
 
             return Json(new {data = dt.OrderBy(x => x.RegDate)}, JsonRequestBehavior.AllowGet);
@@ -54,9 +57,15 @@ namespace DatieProject.Controllers
                             {
                                 data.isActive = true;
                             }
-                            return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+                            else
+                            {
+                                return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+                            }
                         }
-                        data.isActive = true;
+                        else
+                        {
+                            data.isActive = true;
+                        }
                     }
                     //else, change active to deactive
                     else
@@ -69,9 +78,15 @@ namespace DatieProject.Controllers
                             {
                                 data.isActive = false;
                             }
-                            return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+                            else
+                            {
+                                return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+                            }
                         }
-                        data.isActive = false;
+                        else
+                        {
+                            data.isActive = false;
+                        }
                     }
                     _datieDb.Entry(data).State = EntityState.Modified;
                     var check = _datieDb.SaveChanges();
@@ -87,26 +102,29 @@ namespace DatieProject.Controllers
         public JsonResult ChangeRole(string id, string status)
         {
             var data = _datieDb.tbl_User.ToList().Find(x => x.username.Equals(id));
-            if (data != null)
+            var session = (ApplicationUser) Session["User"];
+            //check user login is admin
+            if (session.Info.IsAdminMaster)
             {
-                if (status.Equals("Admin"))
+                //check acccount avaliable
+                if (data != null)
                 {
-                    data.isAdmin = true;
-                }
-                else
-                {
-                    if (data.isAdmin)
+                    //if status is admin, change account from user to admin
+                    if (status.Equals("Admin"))
                     {
-                        //Check user login is admin master. Only admin master can deactivate admin account
-                        return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+                        data.isAdmin = true;
                     }
-                    data.isAdmin = false;
-                }
-                _datieDb.Entry(data).State = EntityState.Modified;
-                var check = _datieDb.SaveChanges();
-                if (check > 0)
-                {
-                    return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+                    //change role admin to user
+                    else
+                    {
+                        data.isAdmin = false;
+                    }
+                    _datieDb.Entry(data).State = EntityState.Modified;
+                    var check = _datieDb.SaveChanges();
+                    if (check > 0)
+                    {
+                        return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+                    }
                 }
             }
             return Json(new {success = false}, JsonRequestBehavior.AllowGet);

@@ -1,26 +1,38 @@
 ﻿@model DatieProject.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "HomePage";
+    ViewBag.Title = "Account Management";
+    var session = Session["User"];
 }
-
+@if (session != null)
+{
 <div class="container body-content" style="margin-top: 30px;">
     <table id="table" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Username</th>
-                <th>Reg Date</th>
                 <th>isAdmin</th>
+                <th></th>
                 <th>Status</th>
-                <th width="35px"></th>
+                <th>Reg Date</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
 </div>
 
-<div id="dialog"></div>
+    <div id="dialog"></div>
+}
+else
+{
+    <center>
+        <h3>
+            Please login to view this page. <br />
+            @Html.ActionLink("Click Here To Login", "Index", "Home")
+        </h3>
+    </center>
+}
 
 @section Scripts {
-    <script src="~/Scripts/Home/home.js"></script>
+    <script src="~/Scripts/User/user.js"></script>
 }

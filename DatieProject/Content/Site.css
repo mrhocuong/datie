@@ -61,3 +61,104 @@ input[type="checkbox"].input-validation-error {
 .custom-bootbox .modal-dialog{
     width:200px;
 }
+
+/* BUTTON 5 */
+
+
+.five .button-wrap {
+  width: 95px;
+  height: 25px;
+  /*margin: 40px auto 0;*/
+  cursor: pointer;
+}
+.five .button-bg {
+  width: 100%;
+  height: 100%;
+  background-color: #A9A5A5;
+  border-radius: 40px;
+  padding: 3px;
+  color:#fff;
+  transition:all 0.2s ease;
+}
+/*.five :hover.button-bg {
+  color:#22dd22;
+}*/
+.five .button-active :hover.button-bg {
+
+}
+.five .button-switch {
+  position:relative;
+  left:0px;
+  width: 43px;
+  height: 19px;
+  background-color:#fff;
+  /*border:solid 13px;*/
+  border-radius: 36px;
+  transition:all 0.2s ease;
+}
+.five .button-active .button-switch { left:45px; }
+.five .button-in, 
+.five .button-out {
+  position:absolute; 
+  transition:all 0.2s ease;
+  padding-top:3px;
+  font-size:0.8em;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+.five .button-in { margin-left:50px; }
+.five .button-out { margin-left:6px; }
+.five .button-active .button-out { color:#fff; }
+.five .button-active .button-in { color:#fff; }
+.five .button-active .button-bg { background-color:#22dd22; }
+
+/* BUTTON 5.2 */
+
+
+.five .button-wrap-two {
+  width: 70px;
+  height: 25px;
+  /*margin: 40px auto 0;*/
+  cursor: pointer;
+}
+.five .button-bg-two {
+  width: 100%;
+  height: 100%;
+  background-color: #A9A5A5;
+  border-radius: 40px;
+  padding: 3px;
+  color:#fff;
+  transition:all 0.2s ease;
+}
+/*.five :hover.button-bg {
+  color:#22dd22;
+}*/
+.five .button-active :hover.button-bg-two {
+
+}
+.five .button-switch-two {
+  position:relative;
+  left:0px;
+  width: 32px;
+  height: 19px;
+  background-color:#fff;
+  /*border:solid 13px;*/
+  border-radius: 36px;
+  transition:all 0.2s ease;
+}
+.five .button-active .button-switch-two { left:32px; }
+.five .button-in-two, 
+.five .button-out-two {
+  position:absolute; 
+  transition:all 0.2s ease;
+  padding-top:3px;
+  font-size:0.8em;
+  text-transform:uppercase;
+  font-weight:bold;
+}
+.five .button-in-two { margin-left:36px; }
+.five .button-out-two { margin-left:6px; }
+.five .button-active .button-out-two { color:#fff; }
+.five .button-active .button-in-two { color:#fff; }
+.five .button-active .button-bg-two { background-color:#22dd22; }
+

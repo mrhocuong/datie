@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -289,9 +290,7 @@
     <Content Include="Content\DataTables\images\xls_hover.png" />
     <Content Include="Content\DataTables\swf\copy_csv_xls.swf" />
     <Content Include="Content\DataTables\swf\copy_csv_xls_pdf.swf" />
-    <Content Include="Content\data_management.png" />
     <Content Include="Content\loading.gif" />
-    <Content Include="Content\user_management.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -344,7 +343,7 @@
     <Content Include="Scripts\Datatables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Datatables\jquery.js" />
     <Content Include="Scripts\Datie\datie.js" />
-    <Content Include="Scripts\Home\home.js" />
+    <Content Include="Scripts\User\user.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.numeric.js" />
     <Content Include="Scripts\jquery.numeric.min.js" />
@@ -385,10 +384,10 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Datie\AddShop.cshtml" />
     <Content Include="Views\Datie\EditShop.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

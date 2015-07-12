@@ -25,7 +25,7 @@ namespace DatieProject
         public Nullable<System.DateTime> reg_date { get; set; }
         public bool isAdmin { get; set; }
         public bool isActive { get; set; }
-        public Nullable<bool> admin_master { get; set; }
+        public bool admin_master { get; set; }
     
         public virtual ICollection<tbl_Comment> tbl_Comment { get; set; }
         public virtual ICollection<tbl_Rate> tbl_Rate { get; set; }

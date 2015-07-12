@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Datie Management System";
     var session = Session["User"];
+    var error = Session["Error"];
 }
 
 @if (session == null)
@@ -14,6 +15,13 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
+                    if(error != null)
+                     {
+                         <div class="form-group" style="margin-left: 146px">
+                             <p style="color: #ff0033">@error</p>
+                         </div>
+                         Session["Error"] = null;   
+                     }
                     <div class="form-group">
                         @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
                         <div class="col-md-7">
@@ -41,9 +49,10 @@
 else
 {
     <center>
-        <h2>Wellcome to Datie Management System</h2></center>
-         @Html.ActionLink("Datie Management","Index","Datie") <br/>
-    @Html.ActionLink("User Management", "Index", "User")
+        <h2>Wellcome to Datie Management System</h2>
+        @Html.ActionLink("Datie Management", "Index", "Datie") <br />
+        @Html.ActionLink("User Management", "Index", "User")
+    </center>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -31,26 +31,29 @@ namespace DatieProject.Controllers
                 var user = new ApplicationUser();
                 if (checkLogin != null)
                 {
-                    if (checkLogin.isAdmin)
+                    if (checkLogin.isAdmin && checkLogin.isActive)
                     {
                         var info = new Info
                         {
                             Username = checkLogin.username,
                             IsAdmin = checkLogin.isAdmin,
-                            IsActive = checkLogin.isActive
-                            // IsAdminMaster = (bool) checkLogin.admin_master
+                            IsActive = checkLogin.isActive,
+                            IsAdminMaster = checkLogin.admin_master
                         };
                         user.Info = info;
                         Session["User"] = user;
                         return RedirectToLocal(returnUrl);
                     }
+                    else
+                    {
+                        Session["Error"] = "This account is deactivated!";
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    Session["Error"] = "Invalid username or password. Try Again!";
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return RedirectToLocal(returnUrl);
         }
