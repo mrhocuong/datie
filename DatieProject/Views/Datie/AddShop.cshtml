@@ -75,13 +75,13 @@
                             @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
-                    <div class="form-control-manual">
+                    @*<div class="form-control-manual">
                         <h1>Upload Your Images</h1>
                         <form method="post" enctype="multipart/form-data" action="upload.php">
                             <input type="file" name="images" id="images" multiple/>
                             <button type="submit" id="btn">Upload Files!</button>
                         </form>
-                    </div>
+                    </div>*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

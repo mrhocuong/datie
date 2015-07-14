@@ -36,17 +36,19 @@ namespace DatieProject.Controllers
             var dt = _datieDb.tbl_Shop.ToList().Find(x => x.id_shop.ToString() == model.ShopId);
             if (dt == null)
             {
-                var data = new tbl_Shop();
-                data.name = model.ShopName;
-                data.address = model.ShopAddress;
-                data.description = model.ShopDescription;
-                data.averageRate = Convert.ToDouble(model.ShopRate);
-                data.phone = model.ShopPhone;
-                data.price_medium = Convert.ToDouble(model.ShopPriceMid);
-                data.time_medium = Convert.ToDouble(model.ShopTimeMid);
-                data.id_district = Convert.ToInt32(model.DistrictId);
-                data.id_food = Convert.ToInt32(model.FoodId);
-                data.isDelete = false;
+                var data = new tbl_Shop
+                {
+                    name = model.ShopName,
+                    address = model.ShopAddress,
+                    description = model.ShopDescription,
+                    averageRate = Convert.ToDouble(model.ShopRate),
+                    phone = model.ShopPhone,
+                    price_medium = Convert.ToDouble(model.ShopPriceMid),
+                    time_medium = Convert.ToDouble(model.ShopTimeMid),
+                    id_district = Convert.ToInt32(model.DistrictId),
+                    id_food = Convert.ToInt32(model.FoodId),
+                    isDelete = false
+                };
                 _datieDb.tbl_Shop.Add(data);
                 var check = _datieDb.SaveChanges();
                 if (check > 0)
@@ -76,7 +78,7 @@ namespace DatieProject.Controllers
                 data.name = model.ShopName;
                 data.address = model.ShopAddress;
                 data.description = model.ShopDescription;
-                data.averageRate = Convert.ToDouble(model.ShopRate);
+                //data.averageRate = Convert.ToDouble(model.ShopRate);
                 data.phone = model.ShopPhone;
                 data.price_medium = Convert.ToDouble(model.ShopPriceMid);
                 data.time_medium = Convert.ToDouble(model.ShopTimeMid);
