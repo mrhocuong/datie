@@ -162,3 +162,9 @@ input[type="checkbox"].input-validation-error {
 .five .button-active .button-in-two { color:#fff; }
 .five .button-active .button-bg-two { background-color:#22dd22; }
 
+.search-form {
+    border: solid; 
+    margin-top: 20px; 
+    height: 400px; 
+    border-color: rgb(66, 139, 202)
+}

@@ -4,6 +4,44 @@
 }
 @if (session != null)
 {
+    <div class="form-control-manual" style="margin-top: 20px">
+        <div class="edit-label">
+            <label for="search">Shop Name</label>
+        </div>
+        <div class="editor-field input-group" style="width: 1020px">
+            <input class="form-control" id="search"/>
+            <span class="input-group-addon" id="basic-addon2">Search
+                <span class="caret"></span></span>
+         
+        </div>
+    </div>
+    <span class="glyphicon glyphicon-open"></span>
+    <div class="search-form ">
+       
+        <form id="search" style="margin-top: 20px; margin-left: 60px">
+            <div class="row">
+                <div class="form-control-manual col-xs-6">
+                    <div class="edit-label">
+                        <label for="sShopName">Shop Name</label>
+                    </div>
+                    <div class="editor-field" style="width: 320px">
+                        <input class="form-control" id="sShopName"/>
+                    </div>
+
+                </div>
+                <div class="form-control-manual col-xs-6">
+                    <div class="edit-label">
+                        <label for="sShopName">Shop Name</label>
+                    </div>
+                    <div class="editor-field" style="width: 320px">
+                        <input class="form-control" id="sShopName"/>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
     <button class="btn btn-primary" onclick="AddShop(this, event)" style="margin-top: 20px;margin-left: 15px"> Add New Shop</button>
     <div class="container body-content" style="margin-top: 30px;">
         <table id="example" class="display" cellspacing="0" width="100%">
