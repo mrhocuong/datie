@@ -1,0 +1,44 @@
+{  
+   "Shop":[  
+      {  
+         "shopId":1,
+         "shopName":"Pizza Hut - Nguyễn Trãi",
+         "shopAddress":"264-266 Nguyễn Trãi, Quận 5, TP. HCM",
+         "Description":"Thương hiệu thức ăn nhanh nổi tiếng của Mỹ.",
+         "rate":"5",
+		 "shopThumb":"http://media.foody.vn/res/g4/35995/s/foody-pizza-hut-me-linh-plaza-338-635562370662287046.JPG"
+      },
+      {  
+         "shopId":2,
+         "shopName":"Pizza Hut - 3 Tháng 2",
+         "shopAddress":"Lầu 3 Siêu Thị Maximark, 3 Đường 3 Tháng 2, Quận 10, TP. HCM",
+         "Description":"Thương hiệu thức ăn nhanh nổi tiếng của Mỹ.",
+         "rate":"6.4",
+		 "shopThumb":"http://media.foody.vn/res/g4/35995/s/foody-pizza-hut-me-linh-plaza-338-635562370662287046.JPG"
+      },
+      {  
+         "shopId":3,
+         "shopName":"Pizza Hut - Crescent Mall",
+         "shopAddress":"Lầu 5, Crescent Mall 101 Tôn Dật Tiên, P. Tân Phú, Quận 7, TP. HCM",
+         "Description":"Thương hiệu thức ăn nhanh nổi tiếng của Mỹ.",
+         "rate":"7.3",
+		 "shopThumb":"http://media.foody.vn/res/g4/35995/s/foody-pizza-hut-me-linh-plaza-338-635562370662287046.JPG"
+      },
+      {  
+         "shopId":4,
+         "shopName":"Phở Tàu Bay",
+         "shopAddress":"433 - 435 Lý Thái Tổ, P. 9, Quận 10, TP. HCM",
+         "Description":"Hương vị đậm đà",
+         "rate":"7",
+		 "shopThumb":"http://buzz.cruel.co/wp-content/uploads/2015/01/So-Phocking-Good-Shira-004.jpg"
+      },
+	  {  
+         "shopId":5,
+         "shopName":"Phở Tàu Bay",
+         "shopAddress":"433 - 435 Lý Thái Tổ, P. 9, Quận 10, TP. HCM",
+         "Description":"Hương vị đậm đà",
+         "rate":"7",
+		 "shopThumb":"http://buzz.cruel.co/wp-content/uploads/2015/01/So-Phocking-Good-Shira-004.jpg"
+      }
+   ]
+}
