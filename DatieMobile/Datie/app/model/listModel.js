@@ -2,22 +2,32 @@ Ext.define('Datie.model.listModel', {
 	extend: 'Ext.data.Model',
     config: {
         fields: [
-        {name: 'shopId', type: 'int'},
-        {name: 'shopName', type: 'string'},
-        {name: 'shopAddress', type: 'string'},
-        {name: 'Description', type: 'string'},
-        {name: 'rate', type: 'int'},
-        {name: 'shopThumb', type: 'string'},
+        {name: '$id ', type: 'int'},
+        {name: 'ShopId', type: 'int'},
+        {name: 'ShopName', type: 'string'},
+        {name: 'ShopAddress', type: 'string'},
+        {name: 'District', type: 'string'},
+        {name: 'Food', type: 'string'},
+        {name: 'ShopPhone', type: 'string'},
+        {name: 'ShopDescription', type: 'string'},
+        {name: 'ShopPriceMid', type: 'string'},
+        {name: 'ShopTimeMid', type: 'string'},
+        {name: 'ShopIsDeleted', type: 'boolean'},        
+        {name: 'ShopRate', type: 'int'},
+        {name: 'Image', type: 'string'},
+        {name: 'ThumbnailLink', type: 'string'}
 
 
          ],
-             proxy: {
-            type: 'ajax',
-            url: 'datalist.json',
-            reader:{
-            type: 'json',
-            rootProperty: 'Shop'
-        }
-         }
+        //      proxy: {
+        //     method: 'GET',
+        //     type: 'ajax',
+        //     url: 'http://datie3.somee.com/api/Datie/',
+        //     reader:{
+        //     type: 'json',
+        //     method: 'GET',
+        //     //rootProperty: 'Shop'
+        // }
+        //  }
     },
 });

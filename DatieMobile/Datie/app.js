@@ -12,16 +12,18 @@
 
 Ext.application({
     name: 'Datie',
-    views: ['DatieView', 'listView'],
-    stores: ['ListStore'],
+    views: ['DatieView', 'listView', 'searchView', 'loginView', 'registerView'],
+    stores:['ListStore'],
     models: ['listModel'],
+    controllers: ['controllerDatie'],
     launch: function() {
         console.log("App launch");
         var datieView = Ext.create(Datie.view.DatieView);
-        setTimeout("Ext.fly('startScreen').destroy()", 2000);
+        var loginView = Ext.create(Datie.view.loginView);
+        setTimeout("Ext.fly('startScreen').destroy()", 2000);        
         Ext.Viewport.add(datieView);
-
-
+        //Ext.Viewport.add(loginView);
+        
     }
 
 //    requires: [

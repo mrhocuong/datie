@@ -5,11 +5,11 @@ Ext.define("Datie.view.listView", {
 		scrollable: true,
 		itemTpl: Ext.XTemplate([
 			'<div>',
-			'<div><img src = {shopThumb} height="150px" width="340px"></div>',
-			'<div>{shopName}</div>',
-			'<div>{Description}</div>',
-			'<div>Address: {shopAddress}</div>',			
-			'<div>Rate: {rate}</div>',
+			'<div><b>{ShopName}</b></div>',
+			'<div><img src = {ThumbnailLink} height="150" width="340"></div>',
+			'<div>{ShopDescription}</div>',
+			'<div><b>Address: </b>{ShopAddress}</div>',			
+			'<div><b>Rate: </b>{ShopRate}</div>',
 			'</div>'
 			].join('')),
 		store: 'ListStore',
