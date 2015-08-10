@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatieDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Comment">
+          <Key>
+            <PropertyRef Name="id_cmt" />
+          </Key>
+          <Property Name="id_cmt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_shop" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_cmt" Type="date" Nullable="false" />
+          <Property Name="comment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_District">
+          <Key>
+            <PropertyRef Name="id_district" />
+          </Key>
+          <Property Name="id_district" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Image">
+          <Key>
+            <PropertyRef Name="id_img" />
+          </Key>
+          <Property Name="id_img" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_shop" Type="int" Nullable="false" />
+          <Property Name="url_image" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+          <Property Name="update_date" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_Main_Course">
+          <Key>
+            <PropertyRef Name="id_food" />
+          </Key>
+          <Property Name="id_food" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_food" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Rate">
+          <Key>
+            <PropertyRef Name="id_rate" />
+          </Key>
+          <Property Name="id_rate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_shop" Type="int" Nullable="false" />
+          <Property Name="usename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rate" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Shop">
+          <Key>
+            <PropertyRef Name="id_shop" />
+          </Key>
+          <Property Name="id_shop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="70" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_district" Type="int" />
+          <Property Name="id_food" Type="int" />
+          <Property Name="description" Type="nvarchar" MaxLength="200" />
+          <Property Name="price_medium" Type="float" />
+          <Property Name="time_medium" Type="float" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="averageRate" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="reg_date" Type="date" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="admin_master" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Comment_tbl_Shop">
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
+          <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Shop">
+              <PropertyRef Name="id_shop" />
+            </Principal>
+            <Dependent Role="tbl_Comment">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Comment_tbl_User">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
+          <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tbl_Comment">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Image_tbl_Shop">
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
+          <End Role="tbl_Image" Type="Self.tbl_Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Shop">
+              <PropertyRef Name="id_shop" />
+            </Principal>
+            <Dependent Role="tbl_Image">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Rate_tbl_Shop">
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
+          <End Role="tbl_Rate" Type="Self.tbl_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Shop">
+              <PropertyRef Name="id_shop" />
+            </Principal>
+            <Dependent Role="tbl_Rate">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Rate_tbl_User">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
+          <End Role="tbl_Rate" Type="Self.tbl_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tbl_Rate">
+              <PropertyRef Name="usename" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Shop_tbl_District">
+          <End Role="tbl_District" Type="Self.tbl_District" Multiplicity="0..1" />
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_District">
+              <PropertyRef Name="id_district" />
+            </Principal>
+            <Dependent Role="tbl_Shop">
+              <PropertyRef Name="id_district" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Shop_tbl_Main_Course">
+          <End Role="tbl_Main_Course" Type="Self.tbl_Main_Course" Multiplicity="0..1" />
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Main_Course">
+              <PropertyRef Name="id_food" />
+            </Principal>
+            <Dependent Role="tbl_Shop">
+              <PropertyRef Name="id_food" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatieDBModelStoreContainer">
+          <EntitySet Name="tbl_Comment" EntityType="Self.tbl_Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_District" EntityType="Self.tbl_District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Image" EntityType="Self.tbl_Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Main_Course" EntityType="Self.tbl_Main_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Rate" EntityType="Self.tbl_Rate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Shop" EntityType="Self.tbl_Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Comment_tbl_Shop" Association="Self.FK_tbl_Comment_tbl_Shop">
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+            <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Comment_tbl_User" Association="Self.FK_tbl_Comment_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Image_tbl_Shop" Association="Self.FK_tbl_Image_tbl_Shop">
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+            <End Role="tbl_Image" EntitySet="tbl_Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Rate_tbl_Shop" Association="Self.FK_tbl_Rate_tbl_Shop">
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+            <End Role="tbl_Rate" EntitySet="tbl_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Rate_tbl_User" Association="Self.FK_tbl_Rate_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Rate" EntitySet="tbl_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Shop_tbl_District" Association="Self.FK_tbl_Shop_tbl_District">
+            <End Role="tbl_District" EntitySet="tbl_District" />
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Shop_tbl_Main_Course" Association="Self.FK_tbl_Shop_tbl_Main_Course">
+            <End Role="tbl_Main_Course" EntitySet="tbl_Main_Course" />
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatieDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Comment">
+          <Key>
+            <PropertyRef Name="id_cmt" />
+          </Key>
+          <Property Name="id_cmt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_shop" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_cmt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Comment_tbl_Shop" FromRole="tbl_Comment" ToRole="tbl_Shop" />
+          <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_Comment_tbl_User" FromRole="tbl_Comment" ToRole="tbl_User" />
+        </EntityType>
+        <EntityType Name="tbl_District">
+          <Key>
+            <PropertyRef Name="id_district" />
+          </Key>
+          <Property Name="id_district" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="district" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Shop_tbl_District" FromRole="tbl_District" ToRole="tbl_Shop" />
+        </EntityType>
+        <EntityType Name="tbl_Image">
+          <Key>
+            <PropertyRef Name="id_img" />
+          </Key>
+          <Property Name="id_img" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_shop" Type="Int32" Nullable="false" />
+          <Property Name="url_image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
+          <Property Name="update_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Image_tbl_Shop" FromRole="tbl_Image" ToRole="tbl_Shop" />
+        </EntityType>
+        <EntityType Name="tbl_Main_Course">
+          <Key>
+            <PropertyRef Name="id_food" />
+          </Key>
+          <Property Name="id_food" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_food" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Shop_tbl_Main_Course" FromRole="tbl_Main_Course" ToRole="tbl_Shop" />
+        </EntityType>
+        <EntityType Name="tbl_Rate">
+          <Key>
+            <PropertyRef Name="id_rate" />
+          </Key>
+          <Property Name="id_rate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_shop" Type="Int32" Nullable="false" />
+          <Property Name="usename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rate" Type="Double" Nullable="false" />
+          <NavigationProperty Name="tbl_Shop" Relationship="Self.FK_tbl_Rate_tbl_Shop" FromRole="tbl_Rate" ToRole="tbl_Shop" />
+          <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_Rate_tbl_User" FromRole="tbl_Rate" ToRole="tbl_User" />
+        </EntityType>
+        <EntityType Name="tbl_Shop">
+          <Key>
+            <PropertyRef Name="id_shop" />
+          </Key>
+          <Property Name="id_shop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_district" Type="Int32" />
+          <Property Name="id_food" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="price_medium" Type="Double" />
+          <Property Name="time_medium" Type="Double" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="averageRate" Type="Double" Nullable="false" />
+          <NavigationProperty Name="tbl_Comment" Relationship="Self.FK_tbl_Comment_tbl_Shop" FromRole="tbl_Shop" ToRole="tbl_Comment" />
+          <NavigationProperty Name="tbl_District" Relationship="Self.FK_tbl_Shop_tbl_District" FromRole="tbl_Shop" ToRole="tbl_District" />
+          <NavigationProperty Name="tbl_Image" Relationship="Self.FK_tbl_Image_tbl_Shop" FromRole="tbl_Shop" ToRole="tbl_Image" />
+          <NavigationProperty Name="tbl_Main_Course" Relationship="Self.FK_tbl_Shop_tbl_Main_Course" FromRole="tbl_Shop" ToRole="tbl_Main_Course" />
+          <NavigationProperty Name="tbl_Rate" Relationship="Self.FK_tbl_Rate_tbl_Shop" FromRole="tbl_Shop" ToRole="tbl_Rate" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="reg_date" Type="DateTime" Precision="0" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="admin_master" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbl_Comment" Relationship="Self.FK_tbl_Comment_tbl_User" FromRole="tbl_User" ToRole="tbl_Comment" />
+          <NavigationProperty Name="tbl_Rate" Relationship="Self.FK_tbl_Rate_tbl_User" FromRole="tbl_User" ToRole="tbl_Rate" />
+        </EntityType>
+        <Association Name="FK_tbl_Comment_tbl_Shop">
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
+          <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Shop">
+              <PropertyRef Name="id_shop" />
+            </Principal>
+            <Dependent Role="tbl_Comment">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Comment_tbl_User">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
+          <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tbl_Comment">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Shop_tbl_District">
+          <End Role="tbl_District" Type="Self.tbl_District" Multiplicity="0..1" />
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_District">
+              <PropertyRef Name="id_district" />
+            </Principal>
+            <Dependent Role="tbl_Shop">
+              <PropertyRef Name="id_district" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Image_tbl_Shop">
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
+          <End Role="tbl_Image" Type="Self.tbl_Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Shop">
+              <PropertyRef Name="id_shop" />
+            </Principal>
+            <Dependent Role="tbl_Image">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Shop_tbl_Main_Course">
+          <End Role="tbl_Main_Course" Type="Self.tbl_Main_Course" Multiplicity="0..1" />
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Main_Course">
+              <PropertyRef Name="id_food" />
+            </Principal>
+            <Dependent Role="tbl_Shop">
+              <PropertyRef Name="id_food" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Rate_tbl_Shop">
+          <End Role="tbl_Shop" Type="Self.tbl_Shop" Multiplicity="1" />
+          <End Role="tbl_Rate" Type="Self.tbl_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Shop">
+              <PropertyRef Name="id_shop" />
+            </Principal>
+            <Dependent Role="tbl_Rate">
+              <PropertyRef Name="id_shop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Rate_tbl_User">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
+          <End Role="tbl_Rate" Type="Self.tbl_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tbl_Rate">
+              <PropertyRef Name="usename" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatieDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Comment" EntityType="Self.tbl_Comment" />
+          <EntitySet Name="tbl_District" EntityType="Self.tbl_District" />
+          <EntitySet Name="tbl_Image" EntityType="Self.tbl_Image" />
+          <EntitySet Name="tbl_Main_Course" EntityType="Self.tbl_Main_Course" />
+          <EntitySet Name="tbl_Rate" EntityType="Self.tbl_Rate" />
+          <EntitySet Name="tbl_Shop" EntityType="Self.tbl_Shop" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
+          <AssociationSet Name="FK_tbl_Comment_tbl_Shop" Association="Self.FK_tbl_Comment_tbl_Shop">
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+            <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Comment_tbl_User" Association="Self.FK_tbl_Comment_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Shop_tbl_District" Association="Self.FK_tbl_Shop_tbl_District">
+            <End Role="tbl_District" EntitySet="tbl_District" />
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Image_tbl_Shop" Association="Self.FK_tbl_Image_tbl_Shop">
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+            <End Role="tbl_Image" EntitySet="tbl_Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Shop_tbl_Main_Course" Association="Self.FK_tbl_Shop_tbl_Main_Course">
+            <End Role="tbl_Main_Course" EntitySet="tbl_Main_Course" />
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Rate_tbl_Shop" Association="Self.FK_tbl_Rate_tbl_Shop">
+            <End Role="tbl_Shop" EntitySet="tbl_Shop" />
+            <End Role="tbl_Rate" EntitySet="tbl_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Rate_tbl_User" Association="Self.FK_tbl_Rate_tbl_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Rate" EntitySet="tbl_Rate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatieDBModelStoreContainer" CdmEntityContainer="DatieDBEntities">
+          <EntitySetMapping Name="tbl_Comment">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_Comment">
+              <MappingFragment StoreEntitySet="tbl_Comment">
+                <ScalarProperty Name="id_cmt" ColumnName="id_cmt" />
+                <ScalarProperty Name="id_shop" ColumnName="id_shop" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="date_cmt" ColumnName="date_cmt" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_District">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_District">
+              <MappingFragment StoreEntitySet="tbl_District">
+                <ScalarProperty Name="id_district" ColumnName="id_district" />
+                <ScalarProperty Name="district" ColumnName="district" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Image">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_Image">
+              <MappingFragment StoreEntitySet="tbl_Image">
+                <ScalarProperty Name="id_img" ColumnName="id_img" />
+                <ScalarProperty Name="id_shop" ColumnName="id_shop" />
+                <ScalarProperty Name="url_image" ColumnName="url_image" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Main_Course">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_Main_Course">
+              <MappingFragment StoreEntitySet="tbl_Main_Course">
+                <ScalarProperty Name="id_food" ColumnName="id_food" />
+                <ScalarProperty Name="name_food" ColumnName="name_food" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Rate">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_Rate">
+              <MappingFragment StoreEntitySet="tbl_Rate">
+                <ScalarProperty Name="id_rate" ColumnName="id_rate" />
+                <ScalarProperty Name="id_shop" ColumnName="id_shop" />
+                <ScalarProperty Name="usename" ColumnName="usename" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Shop">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_Shop">
+              <MappingFragment StoreEntitySet="tbl_Shop">
+                <ScalarProperty Name="id_shop" ColumnName="id_shop" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id_district" ColumnName="id_district" />
+                <ScalarProperty Name="id_food" ColumnName="id_food" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price_medium" ColumnName="price_medium" />
+                <ScalarProperty Name="time_medium" ColumnName="time_medium" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="averageRate" ColumnName="averageRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="DatieDBModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="admin_master" ColumnName="admin_master" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
