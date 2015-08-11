@@ -1,0 +1,15 @@
+/api/Datie -  Get all data of tbl_Shop (HTTP GET)
+
+/api/Datie/id -  get data by shop id (HTTP GET)
+
+/api/Register - Register new account (HTTP POST)
+
+/api/Login - Check login (HTTP POST)
+
+/api/Comment/id - Get commnet of shop by id (HTTP GET)
+
+/api/Comment - post comment (HTTP POST)
+
+/api/Rate/id - Get rate of shop by id (HTTP GET)
+
+/api/Rate - post rate (HTTP POST)
