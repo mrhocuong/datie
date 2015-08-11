@@ -11,10 +11,22 @@ namespace DatieAPI.Controllers
 
         public Register PostRegister(LoginViewModel model)
         {
+            var res = new Register();
+            if (model.UserName=="")
+            {
+
+                res.Message = "Username cannot null!";
+                return res;
+            }
+            if (model.Password=="")
+            {
+                res.Message = "Password cannot null!";
+                return res;
+            }
             var checkLogin =
                 _datieDb.tbl_User.FirstOrDefault(
                     x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
-            var res = new Register();
+           
             if (checkLogin == null)
             {
                 var data = new tbl_User

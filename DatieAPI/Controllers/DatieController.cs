@@ -29,10 +29,11 @@ namespace DatieAPI.Controllers
                     ShopTimeMid = x.time_medium.ToString()
                 };
                 var tmpImg = ImageLink(x.id_shop).FirstOrDefault();
-                if (tmpImg!=null)
+                if (tmpImg != null)
                 {
                     tmp.ThumbnailLink = tmpImg.ImgLink;
                 }
+                else tmp.ThumbnailLink = "http://i.imgur.com/ftNpsJS.jpg";
                 dt.Add(tmp);
             });
             return dt;
@@ -42,6 +43,15 @@ namespace DatieAPI.Controllers
         {
             var tmpData = DatieDb.tbl_Shop.FirstOrDefault(x => x.id_shop == id);
             var imgList = ImageLink(id);
+            if (imgList.Count == 0)
+            {
+                var tmp = new ImageModel
+                {
+                    ImgId = 1,
+                    ImgLink = "http://i.imgur.com/ftNpsJS.jpg"
+                };
+                imgList.Add(tmp);
+            }
             if (tmpData != null)
             {
                 var model = new DatieModel

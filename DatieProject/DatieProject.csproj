@@ -231,7 +231,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\animate.css" />
-    <Content Include="assets\css\font-awesome.min.css" />
     <Content Include="assets\css\pages\login-soft.css" />
     <Content Include="assets\css\print.css" />
     <Content Include="assets\css\style-metro.css" />
@@ -1087,27 +1086,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\database.png" />
-    <Content Include="Content\DataTables\css\dataTables.autoFill.css" />
-    <Content Include="Content\DataTables\css\dataTables.autoFill.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
-    <Content Include="Content\DataTables\css\dataTables.colReorder.css" />
-    <Content Include="Content\DataTables\css\dataTables.colReorder.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.colVis.css" />
-    <Content Include="Content\DataTables\css\dataTables.colvis.jqueryui.css" />
-    <Content Include="Content\DataTables\css\dataTables.colVis.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.fixedColumns.css" />
-    <Content Include="Content\DataTables\css\dataTables.fixedColumns.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.fixedHeader.css" />
-    <Content Include="Content\DataTables\css\dataTables.fixedHeader.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
-    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
-    <Content Include="Content\DataTables\css\dataTables.keyTable.css" />
-    <Content Include="Content\DataTables\css\dataTables.keyTable.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.responsive.css" />
-    <Content Include="Content\DataTables\css\dataTables.scroller.css" />
-    <Content Include="Content\DataTables\css\dataTables.scroller.min.css" />
-    <Content Include="Content\DataTables\css\dataTables.tableTools.css" />
-    <Content Include="Content\DataTables\css\dataTables.tableTools.min.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
@@ -1179,8 +1157,6 @@
       <DependentUpon>DatieDB.edmx</DependentUpon>
       <LastGenOutput>DatieDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\DataTables\css\dataTables.responsive.scss" />
-    <Content Include="Content\DataTables\css\dataTables.jqueryui.scss" />
     <Content Include="assets\plugins\bootstrap-colorpicker\less\colorpicker.less" />
     <Content Include="assets\plugins\bootstrap-toggle-buttons\LICENSE" />
     <Content Include="assets\plugins\bootstrap-toggle-buttons\README.md" />

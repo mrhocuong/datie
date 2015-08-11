@@ -39,23 +39,31 @@ namespace DatieProject.Controllers
                 var user = new ApplicationUser();
                 if (checkLogin != null)
                 {
-                    if (checkLogin.isAdmin && checkLogin.isActive)
+                    if (checkLogin.isAdmin)
                     {
-                        var info = new Info
+                        if (checkLogin.isActive)
                         {
-                            Username = checkLogin.username,
-                            IsAdmin = checkLogin.isAdmin,
-                            IsActive = checkLogin.isActive,
-                            IsAdminMaster = checkLogin.admin_master
-                        };
-                        user.Info = info;
-                        Session["User"] = user;
-                        return RedirectToLocal(returnUrl);
+                            var info = new Info
+                            {
+                                Username = checkLogin.username,
+                                IsAdmin = checkLogin.isAdmin,
+                                IsActive = checkLogin.isActive,
+                                IsAdminMaster = checkLogin.admin_master
+                            };
+                            user.Info = info;
+                            Session["User"] = user;
+                            return RedirectToLocal(returnUrl);
+                        }
+                        else
+                        {
+                            Session["Error"] = "This account is deactivated!";
+                        }
                     }
                     else
                     {
-                        Session["Error"] = "This account is deactivated!";
+                        Session["Error"] = "This account don't have permission to login!";
                     }
+                   
                 }
                 else
                 {
