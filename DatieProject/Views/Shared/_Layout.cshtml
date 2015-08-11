@@ -12,7 +12,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico"/>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/bundles/MaterialCss")
-
+    <style>
+        li:hover {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-bottom-color: transparent;
+            color: #555555;
+            cursor: default;
+        }
+    </style>
 </head>
 <body>
 
@@ -55,5 +63,6 @@
 @Scripts.Render("~/bundles/numberic")
 @Scripts.Render("~/bundles/Material")
 @RenderSection("scripts", false)
+
 </body>
 </html>

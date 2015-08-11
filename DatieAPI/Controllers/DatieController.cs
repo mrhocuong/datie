@@ -12,7 +12,7 @@ namespace DatieAPI.Controllers
 
         public IEnumerable<DatieModel> GetData()
         {
-            var data = DatieDb.tbl_Shop.OrderBy(x => x.id_shop).ToList();
+            var data = DatieDb.tbl_Shop.Where(x=>x.isDelete==false).OrderBy(x => x.id_shop).ToList();
             var dt = new List<DatieModel>();
             data.ForEach(x =>
             {

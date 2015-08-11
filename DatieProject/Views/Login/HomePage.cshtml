@@ -11,7 +11,7 @@
         <div class="edit-label" style="padding-left: 335px" onclick=" Datie() ">
             <div class="alert-primary" style="height: 200px; width: 200px;">
                 <img src="~/Content/database.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
-                <span style="font-size: 20px">Data Management</span>
+                <span id="txtData"style="font-size: 20px">Data Management</span>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
     function bigImg(x) {
         $(x).animate({
             width: "150px",
-            height: "150px",
+            height: "150px"
         }, 100);
     }
 
