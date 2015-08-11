@@ -282,17 +282,17 @@ table.dataTable td {
   float: left;
 }
 .dataTables_wrapper .dataTables_filter {
-  /*float: right;
-  text-align: right;*/
-  display: none
+  float: right;
+  text-align: right;
+  /*display: none*/
 }
 .dataTables_wrapper .dataTables_filter input {
   margin-left: 0.5em;
 }
 .dataTables_wrapper .dataTables_info {
-  /*clear: both;
+  clear: both;
   float: left;
-  padding-top: 0.755em;*/
+  padding-top: 0.755em;
   display: none
 }
 .dataTables_wrapper .dataTables_paginate {

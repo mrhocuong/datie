@@ -1,0 +1,49 @@
+﻿@model DatieProject.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Datie Management System";
+}
+
+<center>
+    <h2>Datie Management System</h2>
+
+    <div class="form-control-manual" style="margin-top: 50px">
+        <div class="edit-label" style="padding-left: 335px" onclick=" Datie() ">
+            <div class="alert-primary" style="height: 200px; width: 200px;">
+                <img src="~/Content/database.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
+                <span style="font-size: 20px">Data Management</span>
+            </div>
+        </div>
+
+        <div class="editor-field" style="padding-left: 170px" onclick=" User() ">
+            <div class="alert-primary" style="height: 200px; width: 200px;">
+                <img src="~/Content/user.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
+                <span style="font-size: 20px">User Management</span>
+            </div>
+        </div>
+    </div>
+</center>
+
+<script>
+    function bigImg(x) {
+        $(x).animate({
+            width: "150px",
+            height: "150px",
+        }, 100);
+    }
+
+    function thinImg(x) {
+        $(x).animate({
+            width: "120px",
+            height: "120px",
+        }, 100);
+    }
+
+    function Datie() {
+        window.location.href = "/Datie";
+    }
+
+    function User() {
+        window.location.href = "/User";
+    }
+</script>

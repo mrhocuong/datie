@@ -9,11 +9,10 @@ namespace gDrive
 {
     internal class Program
     {
-      //  private const string ApiKey = "6d3483e6373d658";
-       // private const string ApiSecret = "07e2d23520b7c8d17288665358a881b26780d7bc";
-
-        private const string ApiKey = "e8d2e289bf6fbba";
-        private const string ApiSecret = "d85fca9d473c12e8ab768caf718e78accf6bc805";
+        private const string ApiKey = "6d3483e6373d658";
+        private const string ApiSecret = "07e2d23520b7c8d17288665358a881b26780d7bc";
+        // private const string ApiKey = "e8d2e289bf6fbba";
+        //  private const string ApiSecret = "d85fca9d473c12e8ab768caf718e78accf6bc805";
         private static readonly DatieDBEntities _dbEntities = new DatieDBEntities();
 
         private static void Main(string[] args)
@@ -25,10 +24,13 @@ namespace gDrive
             for (var i = 0; i < files.Count; i++)
             {
                 var pathFile = files[i];
+                Console.WriteLine("Upload file " + pathFile);
                 var shopId = Convert.ToInt32(Directory.GetParent(pathFile).Name);
+                Console.WriteLine("Shop Id " + shopId);
                 var url = PostToImgur(pathFile, ApiKey, ApiSecret);
                 if (url != null)
                 {
+                    Console.WriteLine("Upload Success " + url);
                     var img = AddImage(shopId, url);
                     if (img)
                     {

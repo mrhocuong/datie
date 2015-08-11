@@ -180,5 +180,12 @@ namespace DatieProject.Controllers
         }
 
         #endregion
+
+        #region Attach Image
+        public ActionResult Image()
+        {
+            return View();
+        }
+        #endregion
     }
 }

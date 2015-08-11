@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var progress;
+$(document).ready(function () {
     window.dt = $("#example").DataTable({
         "ajax": {
             "url": "Datie/GetData",
@@ -7,70 +8,76 @@
             "data": "data",
         },
         "columns": [
-        { "data": "ShopId" },
-        { "data": "ShopName" },
-        { "data": "ShopAddress" },
-        { "data": "ShopPhone" },
-        { "data": "ShopDescription" },
-        { "data": "ShopTimeMid" },
-        { "data": "ShopPriceMid" },
-        { "data": "ShopRate" },
-        {
-            "data": function (data) {
-                if (data.ShopIsDeleted) {
-                    return "Deleted";
-                } else {
-                    return "None";
-                }
-            }
-        },
+            { "data": "ShopId" },
+            { "data": "ShopName" },
+            { "data": "ShopAddress" },
+            { "data": "ShopPhone" },
+            { "data": "ShopDescription" },
+            { "data": "ShopTimeMid" },
+            { "data": "ShopPriceMid" },
+            { "data": "ShopRate" },
             {
-                "data": function (data, type, full, meta) {
-                    return ' <button id="btnEdit" class="btn btn-danger" onclick="EditShop(this, event)" data-id="' + data.ShopId + '" class="glyphicon glyphicon-edit">Edit</button>';
+                "data": function(data) {
+                    if (data.ShopIsDeleted) {
+                        return "Deleted";
+                    } else {
+                        return "None";
+                    }
+                }
+            },
+            {
+                "data": function(data, type, full, meta) {
+                    return " <button id=\"btnEdit\" class=\"btn btn-danger\" onclick=\"EditShop(this, event)\" data-id=\"" + data.ShopId + "\" class=\"glyphicon glyphicon-edit\">Edit</button>";
                 }
             }
         ],
         "columnDefs": [{ "targets": 9, "orderable": false }]
     });
-
+    $('#li1').addClass('active');
+    $('#li2').removeClass('active');
 });
 
 function EditShop(btn, event) {
-    var id = $(btn).data('id');
-    $('#dialog').empty();
+    var id = $(btn).data("id");
+    $("#dialog").empty();
     $.ajax({
-        url: 'Datie/EditShop',
-        type: 'GET',
+        url: "Datie/EditShop",
+        type: "GET",
         data: { id: id },
-        beforeSend: function () {
-            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+        beforeSend: function() {
+            StartProcessBar();
         },
-        success: function (data) {
-            $('#dialog').html(data);
-            $('#EditModal').modal();
+        success: function(data) {
+            $("#dialog").html(data);
+            $("#EditModal").find(".modal-body").css({
+                width: "auto", //probably not needed
+                height: "auto", //probably not needed 
+                'max-height': "100%"
+            });
+            $("#EditModal").modal();
             $(".numeric").numeric();
         },
-        complete: function () {
-            $.unblockUI();
+        complete: function() {
+            EndProcessBar();
         }
     });
 }
 
 function Edit(btn, event) {
     var model = $("#editForm").serialize();
-    var str1 = $("#ShopIsDeleted").map(function () { return this.id + "=" + this.checked; }).get().join("&");
+    var str1 = $("#ShopIsDeleted").map(function() { return this.id + "=" + this.checked; }).get().join("&");
     if (str1 != "" && model != "") model += "&" + str1;
     else model += str1;
     $.ajax({
-        url: 'Datie/EditShop',
-        type: 'POST',
+        url: "Datie/EditShop",
+        type: "POST",
         data: model,
-        beforeSend: function () {
+        beforeSend: function() {
             $("#EditModal").modal("hide");
-            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+            StartProcessBar();
         },
-        success: function (data) {
-            $.unblockUI();
+        success: function(data) {
+            EndProcessBar();
             if (data.success) {
                 bootbox.dialog({
                     message: "Edit data success.",
@@ -90,7 +97,7 @@ function Edit(btn, event) {
                         success: {
                             label: "Close",
                             className: "btn btn-primary",
-                            callback:function() {
+                            callback: function() {
                                 $("#EditModal").modal("show");
                             }
                         }
@@ -102,35 +109,58 @@ function Edit(btn, event) {
 }
 
 function AddShop(btn, event) {
-    $('#dialog').empty();
+    $("#dialog").empty();
     $.ajax({
-        url: 'Datie/AddShop',
-        type: 'GET',
-        beforeSend: function () {
-            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+        url: "Datie/AddShop",
+        type: "GET",
+        beforeSend: function() {
+            StartProcessBar();
         },
-        success: function (data) {
-            $('#dialog').html(data);
-            $('#AddModal').modal();
+        success: function(data) {
+            $("#dialog").html(data);
+            $("#AddModal").find(".modal-body").css({
+                width: "auto", //probably not needed
+                height: "auto", //probably not needed 
+                'max-height': "100%"
+            });
+            $("#AddModal").modal();
             $(".numeric").numeric();
         },
-        complete: function () {
-            $.unblockUI();
+        complete: function() {
+            EndProcessBar();
         }
     });
 }
 
 function Add(btn, event) {
-    var model = $("#addForm").serialize();
+    var model = $("#addForm").serializeArray();
+    var data = new FormData();
+    //get the input and UL list
+    var input = document.getElementById("Image");
+    //for every file...
+    for (var x = 0; x < input.files.length; x++) {
+        //add to list
+        //var FR = new FileReader();
+        //FR.onload = function(e) {
+        //    var encoded = e.target.result;
+        //    img = { "base64": encoded };
+        //    console.debug(img);
+        //    data.push({ "base64": encoded });
+        //};
+        //FR.readAsDataURL(input.files[x]);
+        data.append("file" + x, input.files[x]);
+    };
+    model.push({ "ImgCollection": data });
+    console.debug(model);
     $.ajax({
-        url: 'Datie/Add',
-        type: 'POST',
+        url: "Datie/Add",
+        type: "POST",
         data: model,
-        beforeSend: function () {
+        beforeSend: function() {
             $("#AddModal").modal("hide");
-            $.blockUI({ message: '<h1><img src="Content/loading.gif" />Please wait...</h1>' });
+            $.blockUI({ message: "<h1><img src=\"Content/loading.gif\" />Please wait...</h1>" });
         },
-        success: function (data) {
+        success: function(data) {
             $.unblockUI();
             if (data.success) {
                 bootbox.dialog({
@@ -151,7 +181,7 @@ function Add(btn, event) {
                         success: {
                             label: "Close",
                             className: "btn btn-primary",
-                            callback: function () {
+                            callback: function() {
                                 $("#AddModal").modal("show");
                             }
                         }
@@ -160,4 +190,26 @@ function Add(btn, event) {
             }
         }
     });
+}
+
+function StartProcessBar() {
+    $.blockUI();
+    $("#processBar").removeClass("hide");
+    progress = setInterval(function() {
+        var $bar = $("#process");
+        if ($bar.width() >= 1300) {
+            clearInterval(progress);
+            $('.progress').removeClass('active');
+        } else {
+            $bar.width($bar.width() + 550);
+        }
+    }, 800);
+}
+
+function EndProcessBar() {
+    clearInterval(progress);
+    $('.progress').removeClass('active');
+    $("#process").removeAttr("style");
+    $("#processBar").addClass("hide");
+    $.unblockUI();
 }

@@ -243,7 +243,7 @@
 		};
 
 		// private data and functions follow...
-
+	    
 		var pageBlock = null;
 		var pageBlockEls = [];
 

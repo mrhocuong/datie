@@ -6,9 +6,9 @@
 }
 @if (session != null)
 {
-<div class="container body-content" style="margin-top: 30px;">
-    <table id="table" class="display" cellspacing="0" width="100%">
-        <thead>
+    <div class="container body-content" style="margin-top: 30px;">
+        <table id="table" class="display" cellspacing="0" width="100%">
+            <thead>
             <tr>
                 <th>Username</th>
                 <th>isAdmin</th>
@@ -16,10 +16,10 @@
                 <th>Status</th>
                 <th>Reg Date</th>
             </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 
     <div id="dialog"></div>
 }
@@ -27,8 +27,8 @@ else
 {
     <center>
         <h3>
-            Please login to view this page. <br />
-            @Html.ActionLink("Click Here To Login", "Index", "Home")
+            Please login to view this page. <br/>
+            @Html.ActionLink("Click Here To Login", "Index", "Login")
         </h3>
     </center>
 }

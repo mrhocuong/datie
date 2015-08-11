@@ -8,32 +8,48 @@ namespace DatieProject
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/Jquery/jquery-{version}.js"));
+                "~/Scripts/Jquery/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/Jquery/jquery.validate*"));
+                "~/Scripts/Jquery/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                "~/Scripts/modernizr-*"));
             bundles.Add(new ScriptBundle("~/bundles/blockUI").Include(
-                       "~/Scripts/jquery.blockUI.js"));
+                "~/Scripts/jquery.blockUI.js",
+                "~/Scripts/jquery.base64img.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
-                      "~/Scripts/bootbox.min.js"));
+                "~/Scripts/bootbox.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/numberic").Include(
-              "~/Scripts/jquery.numeric.js"));
+                "~/Scripts/jquery.numeric.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/Bootstrap/bootstrap.js",
-                      "~/Scripts/Bootstrap/respond.js"));
+                "~/Scripts/Bootstrap/bootstrap.js",
+                "~/Scripts/Bootstrap/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/DataTables/css/jquery.dataTables.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/site.css",
+                "~/Content/DataTables/css/jquery.dataTables.css"));
+               // "~/Content/JqueryUpload/jquery.fileupload*"));
             //User Datatable plugin
             bundles.Add(new ScriptBundle("~/bundles/Datatables").Include(
-                      "~/Scripts/Datatables/jquery.dataTables.min.js"));
+                "~/Scripts/Datatables/jquery.dataTables.min.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/Upload").Include(
+            //     "~/Scripts/JqueryUpload/vendor/jquery.ui.widget.js",
+            //     "~/Scripts/JqueryUpload/jquery.fileupload*",
+            //     "~/Scripts/JqueryUpload/jquery.iframe-transport.js",
+            //     "~/Scripts/JqueryUpload/main.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Material").Include(
+                "~/Scripts/Material/material*",
+                "~/Scripts/Material/ripples*"));
+            bundles.Add(new ScriptBundle("~/bundles/MaterialCss").Include(
+            "~/Content/Material/material*",
+            "~/Content/Material/ripples*",
+            "~/fonts/Material/Material*",
+            "~/fonts/Material/Material*"));
         }
     }
 }

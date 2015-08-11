@@ -9,13 +9,21 @@ namespace DatieProject.Controllers
     {
         private readonly DatieDBEntities _datieDb = new DatieDBEntities();
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult HomePage()
+        {
+            return View();
+        }
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("HomePage", "Login");
         }
 
         [HttpPost]
@@ -55,7 +63,7 @@ namespace DatieProject.Controllers
                 }
             }
             // If we got this far, something failed, redisplay form
-            return RedirectToLocal(returnUrl);
+            return RedirectToAction("Index", "Login");
         }
 
         //
@@ -63,7 +71,7 @@ namespace DatieProject.Controllers
         public ActionResult LogOff()
         {
             Session["User"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

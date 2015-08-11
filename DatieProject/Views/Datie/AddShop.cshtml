@@ -2,15 +2,15 @@
 
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" style="height: 570px">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Edit Shop Detail</h4>
+                <h4 class="modal-title" id="myModalLabel">Add New Shop</h4>
             </div>
             <fieldset id="addForm">
-                <div class="modal-body" style="height: 430px">
+                <div class="modal-body">
                     <div class="form-control-manual">
                         <div class="edit-label">
                             <label for="ShopName">Name</label>
@@ -75,19 +75,21 @@
                             @Html.DropDownListFor(x => x.FoodId, new SelectList(Model.Food, "FoodId", "FoodName"), new {@style = "width:400px", @class = "form-control"})
                         </div>
                     </div>
-                    @*<div class="form-control-manual">
-                        <h1>Upload Your Images</h1>
-                        <form method="post" enctype="multipart/form-data" action="upload.php">
-                            <input type="file" name="images" id="images" multiple/>
-                            <button type="submit" id="btn">Upload Files!</button>
+                    <div class="form-control-manual">
+                        <form method="post" enctype="multipart/form-data">
+                            <span class="btn btn-default btn-file">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                Browse
+                                <input name="filesToUpload[]" id="Image" type="file" multiple="" />
+                            </span>
                         </form>
-                    </div>*@
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
-                </div>
-            </fieldset>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
+                    </div>
+                </fieldset>
+            </div>
         </div>
     </div>
-</div>

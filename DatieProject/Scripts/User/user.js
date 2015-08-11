@@ -1,4 +1,5 @@
-﻿$(document).ready(function() {
+﻿var progress;
+$(document).ready(function () {
     window.dt = $("#table").DataTable({
         "ajax": {
             "url": "User/GetData",
@@ -71,8 +72,10 @@
             { "data": "RegDate" }
         ]
     });
-  //  $("#table_filter input").addClass("form-control");
+    $("#table_filter input").addClass("form-control input-sm");
   //  $("#table_length select").addClass("form-control");
+    $('#li2').addClass('active');
+    $('#li1').removeClass('active');
 });
 
 function Active(btn, event) {
@@ -83,7 +86,7 @@ function Active(btn, event) {
         type: "POST",
         data: { id: id, status: status },
         beforeSend: function() {
-            $.blockUI({ message: "<h1><img src=\"Content/loading.gif\" />Please wait...</h1>" });
+            StartProcessBar();
         },
         success: function(data) {
             if (data.success == false) {
@@ -101,7 +104,7 @@ function Active(btn, event) {
             dt.ajax.reload(null, false);
         },
         complete: function() {
-            $.unblockUI();
+            EndProcessBar();
         }
     });
 }
@@ -119,7 +122,7 @@ function ChangeRole(btn, event) {
         type: "POST",
         data: { id: id, status: status },
         beforeSend: function() {
-            $.blockUI({ message: "<h1><img src=\"Content/loading.gif\" />Please wait...</h1>" });
+            StartProcessBar();
         },
         success: function(data) {
             if (data.success == false) {
@@ -137,7 +140,7 @@ function ChangeRole(btn, event) {
             dt.ajax.reload(null, false);
         },
         complete: function() {
-            $.unblockUI();
+            EndProcessBar();
         }
     });
 }
@@ -145,4 +148,26 @@ function ChangeRole(btn, event) {
 function toggleChangeRole(btn) {
     $(btn).toggleClass("button-active");
     ChangeRole(btn);
+}
+
+function StartProcessBar() {
+    $.blockUI();
+    $("#processBar").removeClass("hide");
+    progress = setInterval(function () {
+        var $bar = $("#process");
+        if ($bar.width() >= 1300) {
+            clearInterval(progress);
+            $('.progress').removeClass('active');
+        } else {
+            $bar.width($bar.width() + 550);
+        }
+    }, 800);
+}
+
+function EndProcessBar() {
+    clearInterval(progress);
+    $('.progress').removeClass('active');
+    $("#process").removeAttr("style");
+    $("#processBar").addClass("hide");
+    $.unblockUI();
 }

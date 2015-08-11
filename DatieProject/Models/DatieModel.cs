@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http.Formatting;
+using System.Web;
 
 namespace DatieProject.Models
 {
@@ -17,5 +19,6 @@ namespace DatieProject.Models
         public string ShopRate { get; set; }
         public IEnumerable<DistrictModel> DistrictList { get; set; }
         public IEnumerable<FoodModel> Food { get; set; }
+        public HttpPostedFileBase ImgCollection { get; set; }
     }
 }
