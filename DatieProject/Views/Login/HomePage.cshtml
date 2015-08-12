@@ -3,26 +3,21 @@
 @{
     ViewBag.Title = "Datie Management System";
 }
-
-<center>
-    <h2>Datie Management System</h2>
-
-    <div class="form-control-manual" style="margin-top: 50px">
-        <div class="edit-label" style="padding-left: 335px" onclick=" Datie() ">
-            <div class="alert-primary" style="height: 200px; width: 200px;">
-                <img src="~/Content/database.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
-                <span id="txtData"style="font-size: 20px">Data Management</span>
-            </div>
-        </div>
-
-        <div class="editor-field" style="padding-left: 170px" onclick=" User() ">
-            <div class="alert-primary" style="height: 200px; width: 200px;">
-                <img src="~/Content/user.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
-                <span style="font-size: 20px">User Management</span>
-            </div>
-        </div>
-    </div>
-</center>
+<style>
+    .child {
+        display: inline-block;
+        *display: inline; /* for IE7*/
+        *zoom: 1; /* for IE7*/
+        min-width: 100px;
+        min-height: 50px;
+        margin-right: 10px;
+        white-space: normal;
+    }
+    .parent {
+        margin-top: 100px;
+        white-space: nowrap;
+    }
+</style>
 
 <script>
     function bigImg(x) {
@@ -46,4 +41,40 @@
     function User() {
         window.location.href = "/User";
     }
+
+    function Spam() {
+        window.location.href = "/Spam";
+    }
 </script>
+<center>
+    <h2 style="margin-top: 50px">Datie Management System</h2>
+
+    <div class="parent">
+        <div class="child">
+            <div style="padding-left: 50px" onclick=" Datie() ">
+                <div class="alert-primary" style="height: 200px; width: 200px;">
+                    <img src="~/Content/database.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
+                    <span style="font-size: 20px">Data Management</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="child">
+            <div style="padding-left: 100px" onclick=" User() ">
+                <div class="alert-primary" style="height: 200px; width: 200px;">
+                    <img src="~/Content/user.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) "/><br/>
+                    <span style="font-size: 20px">User Management</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="child">
+            <div style="padding-left: 100px" onclick=" Spam() ">
+                <div class="alert-primary" style="height: 200px; width: 200px;">
+                    <img src="~/Content/comments.png" style="height: 130px; margin-top: 20px; width: 130px;" onmouseover=" bigImg(this) " onmouseout=" thinImg(this) " /><br />
+                    <span style="font-size: 20px">Spam Management</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>

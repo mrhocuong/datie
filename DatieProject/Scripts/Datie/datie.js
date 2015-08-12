@@ -4,8 +4,7 @@ $(document).ready(function () {
         "ajax": {
             "url": "Datie/GetData",
             "type": "POST",
-            "dataType": "json",
-            "data": "data",
+            "dataType": "json"
         },
         "columns": [
             { "data": "ShopId" },
@@ -21,7 +20,7 @@ $(document).ready(function () {
                     if (data.ShopIsDeleted) {
                         return "Deleted";
                     } else {
-                        return "None";
+                        return "";
                     }
                 }
             },
@@ -35,6 +34,7 @@ $(document).ready(function () {
     });
     $('#li1').addClass('active');
     $('#li2').removeClass('active');
+    $('#li3').removeClass('active');
 });
 
 function EditShop(btn, event) {
@@ -65,6 +65,7 @@ function EditShop(btn, event) {
 
 function Edit(btn, event) {
     var model = $("#editForm").serialize();
+    //get status checked of checkbox
     var str1 = $("#ShopIsDeleted").map(function() { return this.id + "=" + this.checked; }).get().join("&");
     if (str1 != "" && model != "") model += "&" + str1;
     else model += str1;

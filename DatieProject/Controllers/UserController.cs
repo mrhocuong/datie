@@ -27,7 +27,7 @@ namespace DatieProject.Controllers
                     var tmp = new UserModel
                     {
                         Username = x.username,
-                        RegDate = x.reg_date.ToString(),
+                        RegDate = x.reg_date.ToShortDateString(),
                         IsAdmin = x.isAdmin,
                         IsActive = x.isActive
                     };
@@ -35,7 +35,7 @@ namespace DatieProject.Controllers
                 }
             });
 
-            return Json(new {data = dt.OrderBy(x => x.RegDate)}, JsonRequestBehavior.AllowGet);
+            return Json(new {data = dt.OrderBy(x => x.Username)}, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ChangeStatus(string id, string status)

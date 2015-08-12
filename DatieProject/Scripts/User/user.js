@@ -4,8 +4,7 @@ $(document).ready(function () {
         "ajax": {
             "url": "User/GetData",
             "type": "POST",
-            "dataType": "json",
-            "data": "data",
+            "dataType": "json"
         },
         "columns": [
             { "data": "Username" },
@@ -76,6 +75,7 @@ $(document).ready(function () {
   //  $("#table_length select").addClass("form-control");
     $('#li2').addClass('active');
     $('#li1').removeClass('active');
+    $('#li3').removeClass('active');
 });
 
 function Active(btn, event) {

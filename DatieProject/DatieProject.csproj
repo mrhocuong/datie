@@ -176,6 +176,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DatieController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SpamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DatieDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -202,6 +203,7 @@
     <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\DatieModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SpamModel.cs" />
     <Compile Include="Models\UserModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1085,6 +1087,7 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\comments.png" />
     <Content Include="Content\database.png" />
     <Content Include="Content\DataTables\css\jquery.dataTables.css" />
     <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
@@ -1267,6 +1270,7 @@
     <Content Include="Scripts\Material\material.min.js" />
     <Content Include="Scripts\Material\ripples.js" />
     <Content Include="Scripts\Material\ripples.min.js" />
+    <Content Include="Scripts\Spam\spam.js" />
     <Content Include="Scripts\User\user.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.numeric.js" />
@@ -1308,6 +1312,7 @@
     </Content>
     <Content Include="Scripts\Material\material.min.js.map" />
     <Content Include="Scripts\Material\ripples.min.js.map" />
+    <Content Include="Views\Spam\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

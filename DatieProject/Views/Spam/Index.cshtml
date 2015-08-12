@@ -1,7 +1,5 @@
-﻿@model DatieProject.Models.LoginViewModel
-
-@{
-    ViewBag.Title = "Account Management";
+﻿@{
+    ViewBag.Title = "Spam Management";
     var session = Session["User"];
 }
 @if (session != null)
@@ -9,13 +7,13 @@
     <div class="container body-content" style="margin-top: 30px;">
         <table id="table" class="display" cellspacing="0" width="100%">
             <thead>
-            <tr>
-                <th>Username</th>
-                <th>isAdmin</th>
-                <th>Active/Deactivate</th>
-                <th>Status</th>
-                <th>Reg Date</th>
-            </tr>
+                <tr>
+                    <th>Username</th>
+                    <th>ShopID</th>
+                    <th width="450">Content</th>
+                    <th>Comment Date</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody></tbody>
         </table>
@@ -29,5 +27,5 @@ else
 }
 
 @section Scripts {
-    <script src="~/Scripts/User/user.js"></script>
+    <script src="~/Scripts/Spam/spam.js"></script>
 }

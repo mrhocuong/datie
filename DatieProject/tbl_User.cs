@@ -22,7 +22,7 @@ namespace DatieProject
     
         public string username { get; set; }
         public string password { get; set; }
-        public Nullable<System.DateTime> reg_date { get; set; }
+        public System.DateTime reg_date { get; set; }
         public bool isAdmin { get; set; }
         public bool isActive { get; set; }
         public bool admin_master { get; set; }
