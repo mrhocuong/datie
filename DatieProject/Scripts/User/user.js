@@ -90,16 +90,9 @@ function Active(btn, event) {
         },
         success: function(data) {
             if (data.success == false) {
-                bootbox.dialog({
-                    message: "You do not have permission.",
-                    title: "Message",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary"
-                        }
-                    }
-                });
+                $.notify("You do not have permission.", 'error', { position: "top center" });
+            } else {
+                $.notify("Change status of account successful", 'success', { position: "top center" });
             }
             dt.ajax.reload(null, false);
         },
@@ -126,16 +119,9 @@ function ChangeRole(btn, event) {
         },
         success: function(data) {
             if (data.success == false) {
-                bootbox.dialog({
-                    message: "You do not have permission.",
-                    title: "Message",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary"
-                        }
-                    }
-                });
+                $.notify("You do not have permission.", 'error', { position: "top center" });
+            } else {
+                $.notify("Change role of account successful", 'success', { position: "top center" });
             }
             dt.ajax.reload(null, false);
         },

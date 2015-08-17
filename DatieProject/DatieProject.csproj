@@ -1146,7 +1146,6 @@
     <Content Include="fonts\Material\Material-Design-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <EntityDeploy Include="DatieDB.edmx">
@@ -1281,6 +1280,7 @@
     <Content Include="Scripts\Material\material.min.js" />
     <Content Include="Scripts\Material\ripples.js" />
     <Content Include="Scripts\Material\ripples.min.js" />
+    <Content Include="Scripts\notify.js" />
     <Content Include="Scripts\Spam\spam.js" />
     <Content Include="Scripts\User\user.js" />
     <Content Include="Scripts\jquery.blockUI.js" />

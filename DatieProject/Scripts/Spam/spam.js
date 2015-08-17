@@ -43,29 +43,11 @@ function DeleteComment(btn, event) {
         beforeSend: function() {
             StartProcessBar();
         },
-        success: function(data) {
-            if (data.success == false) {
-                bootbox.dialog({
-                    message: "Delete comment fail!",
-                    title: "Message",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary"
-                        }
-                    }
-                });
+        success: function (data) {
+            if (data.success) {
+                $.notify("Delete comment successful!", 'success', { position: "top center" });
             } else {
-                bootbox.dialog({
-                    message: "Delete comment successful!",
-                    title: "Message",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary"
-                        }
-                    }
-                });
+                $.notify("Delete comment fail. Try Again!", 'error', { position: "top center" });
             }
             dt.ajax.reload(null, false);
         },

@@ -18,10 +18,9 @@ namespace DatieProject
             //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
             //    "~/Scripts/modernizr-*"));
             bundles.Add(new ScriptBundle("~/bundles/blockUI").Include(
-                "~/Scripts/jquery.blockUI.js",
-                "~/Scripts/jquery.base64img.js"));
+                "~/Scripts/jquery.blockUI.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
-                "~/Scripts/bootbox.min.js"));
+                 "~/Scripts/notify.js"));
             bundles.Add(new ScriptBundle("~/bundles/numberic").Include(
                 "~/Scripts/jquery.numeric.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

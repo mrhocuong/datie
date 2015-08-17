@@ -82,31 +82,11 @@ function Edit(btn, event) {
         success: function(data) {
             EndProcessBar();
             if (data.success) {
-                bootbox.dialog({
-                    message: "Edit data success.",
-                    title: "Message",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary"
-                        }
-                    }
-                });
-                dt.ajax.reload(null, false);
+                $.notify("Edit data success.", 'success', { position: "top center" });
             } else {
-                bootbox.dialog({
-                    message: "Edit data unsuccess. Try Again!",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary",
-                            callback: function() {
-                                $("#EditModal").modal("show");
-                            }
-                        }
-                    }
-                });
+                $.notify("Edit data fail. Try Again!", 'error', { position: "top center" });
             }
+            dt.ajax.reload(null, false);
         }
     });
 }
@@ -163,32 +143,11 @@ function Add(btn, event) {
         },
         success: function(data) {
             if (data.success) {
-               // AddImage();
-                bootbox.dialog({
-                    message: "Create new shop success.",
-                    title: "Message",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary"
-                        }
-                    }
-                });
-                dt.ajax.reload(null, false);
+                $.notify("Add data success.", 'success', { position: "top center" });
             } else {
-                bootbox.dialog({
-                    message: "Create new shop unsuccess. Try Again!",
-                    buttons: {
-                        success: {
-                            label: "Close",
-                            className: "btn btn-primary",
-                            callback: function() {
-                                $("#AddModal").modal("show");
-                            }
-                        }
-                    }
-                });
+                $.notify("Add data fail. Try Again!", 'error', { position: "top center" });
             }
+            dt.ajax.reload(null, false);
         },
         complete: function() {
             EndProcessBar();
