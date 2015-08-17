@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net.Http.Formatting;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace DatieProject.Models
@@ -19,6 +19,13 @@ namespace DatieProject.Models
         public string ShopRate { get; set; }
         public IEnumerable<DistrictModel> DistrictList { get; set; }
         public IEnumerable<FoodModel> Food { get; set; }
-        public HttpPostedFileBase ImgCollection { get; set; }
+        public string[] ImgCollection { get; set; }
+        public List<ImageModel> Image { get; set; }
+    }
+
+      public class ImageModel
+    {
+        public int ImgId { get; set; }
+        public string ImgLink { get; set; }
     }
 }

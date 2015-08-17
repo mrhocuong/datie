@@ -27,7 +27,7 @@ namespace gDrive
                 Console.WriteLine("Upload file " + pathFile);
                 var shopId = Convert.ToInt32(Directory.GetParent(pathFile).Name);
                 Console.WriteLine("Shop Id " + shopId);
-                var url = PostToImgur(pathFile, ApiKey, ApiSecret);
+                var url = PostToImgur(pathFile);
                 if (url != null)
                 {
                     Console.WriteLine("Upload Success " + url);
@@ -77,7 +77,7 @@ namespace gDrive
             Console.ReadLine();
         }
 
-        public static string PostToImgur(string imagFilePath, string apiKey, string apiSecret)
+        public static string PostToImgur(string imagFilePath)
         {
             byte[] imageData;
             var fileStream = File.OpenRead(imagFilePath);
@@ -93,7 +93,7 @@ namespace gDrive
                 sb.Append(Uri.EscapeDataString(base64img.Substring(i, Math.Min(MAX_URI_LENGTH, base64img.Length - i))));
             }
 
-            var uploadRequestString = "client_id" + apiKey + "client_secret" + apiSecret + "&title=" + "imageTitle" +
+            var uploadRequestString = "client_id" + ApiKey + "client_secret" + ApiSecret + "&title=" + "imageTitle" +
                                       "&caption=" + "img" + "&image=" + sb;
 
             var webRequest = (HttpWebRequest) WebRequest.Create("https://api.imgur.com/3/upload.xml");

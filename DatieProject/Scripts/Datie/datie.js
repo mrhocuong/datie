@@ -1,5 +1,5 @@
 ﻿var progress;
-$(document).ready(function () {
+$(document).ready(function() {
     window.dt = $("#example").DataTable({
         "ajax": {
             "url": "Datie/GetData",
@@ -26,15 +26,17 @@ $(document).ready(function () {
             },
             {
                 "data": function(data, type, full, meta) {
-                    return " <button id=\"btnEdit\" class=\"btn btn-danger\" onclick=\"EditShop(this, event)\" data-id=\"" + data.ShopId + "\" class=\"glyphicon glyphicon-edit\">Edit</button>";
+                    return " <button id=\"btnEdit\" class=\"btn btn-warning\" onclick=\"EditShop(this, event)\" data-id=\"" + data.ShopId + "\" class=\"glyphicon glyphicon-edit\">Edit</button>";
                 }
             }
         ],
         "columnDefs": [{ "targets": 9, "orderable": false }]
     });
-    $('#li1').addClass('active');
-    $('#li2').removeClass('active');
-    $('#li3').removeClass('active');
+
+    $("#example_filter input").addClass("form-control input-sm");
+    $("#li1").addClass("active");
+    $("#li2").removeClass("active");
+    $("#li3").removeClass("active");
 });
 
 function EditShop(btn, event) {
@@ -135,35 +137,33 @@ function AddShop(btn, event) {
 
 function Add(btn, event) {
     var model = $("#addForm").serializeArray();
-    var data = new FormData();
+    var data = [];
     //get the input and UL list
     var input = document.getElementById("Image");
     //for every file...
     for (var x = 0; x < input.files.length; x++) {
         //add to list
-        //var FR = new FileReader();
-        //FR.onload = function(e) {
-        //    var encoded = e.target.result;
-        //    img = { "base64": encoded };
-        //    console.debug(img);
-        //    data.push({ "base64": encoded });
-        //};
-        //FR.readAsDataURL(input.files[x]);
-        data.append("file" + x, input.files[x]);
+        var FR = new FileReader();
+        FR.onload = function(e) {
+            var encoded = e.target.result;
+            data.push({ ImgId:x, ImgLink:encoded });
+        };
+        FR.readAsDataURL(input.files[x]);
     };
-    model.push({ "ImgCollection": data });
+    //model.push({ "ImgCollection": data });
     console.debug(model);
     $.ajax({
         url: "Datie/Add",
         type: "POST",
-        data: model,
+        datatype:'json',
+        data: JSON.stringify({ model: model, image: data }),
         beforeSend: function() {
             $("#AddModal").modal("hide");
-            $.blockUI({ message: "<h1><img src=\"Content/loading.gif\" />Please wait...</h1>" });
+            StartProcessBar();
         },
         success: function(data) {
-            $.unblockUI();
             if (data.success) {
+               // AddImage();
                 bootbox.dialog({
                     message: "Create new shop success.",
                     title: "Message",
@@ -189,6 +189,29 @@ function Add(btn, event) {
                     }
                 });
             }
+        },
+        complete: function() {
+            EndProcessBar();
+        }
+    });
+}
+
+function AddImage() {
+    var formData = new FormData();
+    var image = document.getElementById("Image").files;
+    for (var i = 0; i < image.length; i++) {
+        formData.append('file' + i, image[0]);
+    }
+    console.debug(formData);
+    $.ajax({
+        url: "Datie/AddImage",
+        type: "POST",
+        data: formData,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            return data.success;
         }
     });
 }
@@ -200,7 +223,7 @@ function StartProcessBar() {
         var $bar = $("#process");
         if ($bar.width() >= 1300) {
             clearInterval(progress);
-            $('.progress').removeClass('active');
+            $(".progress").removeClass("active");
         } else {
             $bar.width($bar.width() + 550);
         }
@@ -209,7 +232,7 @@ function StartProcessBar() {
 
 function EndProcessBar() {
     clearInterval(progress);
-    $('.progress').removeClass('active');
+    $(".progress").removeClass("active");
     $("#process").removeAttr("style");
     $("#processBar").addClass("hide");
     $.unblockUI();

@@ -22,17 +22,15 @@ namespace DatieProject.Controllers
             var dt = new List<UserModel>();
             data.ForEach(x =>
             {
-                if (x.admin_master==false)
+                if (x.admin_master != false) return;
+                var tmp = new UserModel
                 {
-                    var tmp = new UserModel
-                    {
-                        Username = x.username,
-                        RegDate = x.reg_date.ToShortDateString(),
-                        IsAdmin = x.isAdmin,
-                        IsActive = x.isActive
-                    };
-                    dt.Add(tmp);
-                }
+                    Username = x.username,
+                    RegDate = x.reg_date.ToShortDateString(),
+                    IsAdmin = x.isAdmin,
+                    IsActive = x.isActive
+                };
+                dt.Add(tmp);
             });
 
             return Json(new {data = dt.OrderBy(x => x.Username)}, JsonRequestBehavior.AllowGet);
@@ -43,60 +41,52 @@ namespace DatieProject.Controllers
             //Check id is avaliable on database
             var data = _datieDb.tbl_User.ToList().Find(x => x.username.Equals(id));
             var session = (ApplicationUser) Session["User"];
-            if (session.Info.IsAdmin)
+            if (!session.Info.IsAdmin) return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+            if (data == null) return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+            //check status can change (deactivete to active)
+            if (status.Equals("Active"))
             {
-                if (data != null)
+                if (data.isAdmin)
                 {
-                    //check status can change (deactivete to active)
-                    if (status.Equals("Active"))
+                    //Check user login is admin master. Only admin master can active admin account
+                    if (session.Info.IsAdminMaster)
                     {
-                        if (data.isAdmin)
-                        {
-                            //Check user login is admin master. Only admin master can active admin account
-                            if (session.Info.IsAdminMaster)
-                            {
-                                data.isActive = true;
-                            }
-                            else
-                            {
-                                return Json(new {success = false}, JsonRequestBehavior.AllowGet);
-                            }
-                        }
-                        else
-                        {
-                            data.isActive = true;
-                        }
+                        data.isActive = true;
                     }
-                    //else, change active to deactive
                     else
                     {
-                        //if user can change role is admin, check user is loged is master admin
-                        if (data.isAdmin)
-                        {
-                            //Check user login is admin master. Only admin master can deactivate admin account
-                            if (session.Info.IsAdminMaster)
-                            {
-                                data.isActive = false;
-                            }
-                            else
-                            {
-                                return Json(new {success = false}, JsonRequestBehavior.AllowGet);
-                            }
-                        }
-                        else
-                        {
-                            data.isActive = false;
-                        }
-                    }
-                    _datieDb.Entry(data).State = EntityState.Modified;
-                    var check = _datieDb.SaveChanges();
-                    if (check > 0)
-                    {
-                        return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+                        return Json(new {success = false}, JsonRequestBehavior.AllowGet);
                     }
                 }
+                else
+                {
+                    data.isActive = true;
+                }
             }
-            return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+            //else, change active to deactive
+            else
+            {
+                //if user can change role is admin, check user is loged is master admin
+                if (data.isAdmin)
+                {
+                    //Check user login is admin master. Only admin master can deactivate admin account
+                    if (session.Info.IsAdminMaster)
+                    {
+                        data.isActive = false;
+                    }
+                    else
+                    {
+                        return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    data.isActive = false;
+                }
+            }
+            _datieDb.Entry(data).State = EntityState.Modified;
+            var check = _datieDb.SaveChanges();
+            return Json(check > 0 ? new {success = true} : new {success = false}, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ChangeRole(string id, string status)
@@ -104,30 +94,14 @@ namespace DatieProject.Controllers
             var data = _datieDb.tbl_User.ToList().Find(x => x.username.Equals(id));
             var session = (ApplicationUser) Session["User"];
             //check user login is admin
-            if (session.Info.IsAdminMaster)
-            {
-                //check acccount avaliable
-                if (data != null)
-                {
-                    //if status is admin, change account from user to admin
-                    if (status.Equals("Admin"))
-                    {
-                        data.isAdmin = true;
-                    }
-                    //change role admin to user
-                    else
-                    {
-                        data.isAdmin = false;
-                    }
-                    _datieDb.Entry(data).State = EntityState.Modified;
-                    var check = _datieDb.SaveChanges();
-                    if (check > 0)
-                    {
-                        return Json(new {success = true}, JsonRequestBehavior.AllowGet);
-                    }
-                }
-            }
-            return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+            if (!session.Info.IsAdminMaster) return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+            //check acccount avaliable
+            if (data == null) return Json(new {success = false}, JsonRequestBehavior.AllowGet);
+            //if status is admin, change account from user to admin
+            data.isAdmin = status.Equals("Admin");
+            _datieDb.Entry(data).State = EntityState.Modified;
+            var check = _datieDb.SaveChanges();
+            return Json(check > 0 ? new {success = true} : new {success = false}, JsonRequestBehavior.AllowGet);
         }
     }
 }

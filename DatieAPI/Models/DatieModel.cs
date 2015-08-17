@@ -16,7 +16,10 @@ namespace DatieAPI.Models
         public bool ShopIsDeleted { get; set; }
         public string ShopRate { get; set; }
         public IEnumerable<ImageModel> Image { get; set; }
+        public IEnumerable<CommentModel> Commment { get; set; }
         public string ThumbnailLink { get; set; }
+        public double? Lat { get; set; }
+        public double? Lon { get; set; }
     }
 
     public class ImageModel

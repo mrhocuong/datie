@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using DatieAPI.Models;
 
@@ -14,23 +16,33 @@ namespace DatieAPI.Controllers
                 _datieDb.tbl_User.FirstOrDefault(
                     x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
 
-            if (checkLogin != null)
+            if (checkLogin == null) return null;
+            var user = new ApplicationUser();
+            if (checkLogin.isActive)
             {
-                var user = new ApplicationUser();
-                if (checkLogin.isActive)
-                {
-                    user.Username = checkLogin.username;
-                    user.IsAdmin = checkLogin.isAdmin;
-                    user.IsActive = checkLogin.isActive;
-                    user.IsAdminMaster = checkLogin.admin_master;
-                }
-                else
-                {
-                    user.IsActive = checkLogin.isActive;
-                }
-                return user;
+                user.Username = checkLogin.username;
+                user.IsAdmin = checkLogin.isAdmin;
+                user.IsActive = checkLogin.isActive;
+                user.IsAdminMaster = checkLogin.admin_master;
+                
             }
-            return null;
+            else
+            {
+                user.IsActive = checkLogin.isActive;
+            }
+            return user;
         }
+
+        //public bool GetLogOff()
+        //{
+        //    var session = HttpContext.Current.Session;
+        //    if (session["User"] != null)
+        //    {
+        //        session["User"] = null;
+        //        return true;
+        //    }
+        //    return false;
+        //}
+      
     }
 }

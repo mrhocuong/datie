@@ -12,21 +12,21 @@ namespace DatieAPI.Controllers
         public Register PostRegister(LoginViewModel model)
         {
             var res = new Register();
-            if (model.UserName=="")
+            if (model.UserName == "")
             {
-
                 res.Message = "Username cannot null!";
                 return res;
             }
-            if (model.Password=="")
+            if (model.Password == "")
             {
                 res.Message = "Password cannot null!";
                 return res;
             }
+            
             var checkLogin =
                 _datieDb.tbl_User.FirstOrDefault(
                     x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
-           
+
             if (checkLogin == null)
             {
                 var data = new tbl_User
@@ -56,6 +56,5 @@ namespace DatieAPI.Controllers
             res.Message = "Username is avaliable!";
             return res;
         }
-      
     }
 }

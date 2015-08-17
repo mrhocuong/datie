@@ -2,7 +2,10 @@
 
 @{
     ViewBag.Title = "Datie Management System";
+    var session = Session["User"];
 }
+@if (session != null)
+{
 <style>
     .child {
         display: inline-block;
@@ -78,3 +81,8 @@
         </div>
     </div>
 </center>
+}
+else
+{
+    @Html.Partial("Error")
+}

@@ -12,7 +12,7 @@ namespace DatieAPI.Controllers
 
         public IEnumerable<DatieModel> GetData()
         {
-            var data = DatieDb.tbl_Shop.Where(x=>x.isDelete==false).OrderBy(x => x.id_shop).ToList();
+            var data = DatieDb.tbl_Shop.Where(x => x.isDelete == false).OrderBy(x => x.id_shop).ToList();
             var dt = new List<DatieModel>();
             data.ForEach(x =>
             {
@@ -29,11 +29,7 @@ namespace DatieAPI.Controllers
                     ShopTimeMid = x.time_medium.ToString()
                 };
                 var tmpImg = ImageLink(x.id_shop).FirstOrDefault();
-                if (tmpImg != null)
-                {
-                    tmp.ThumbnailLink = tmpImg.ImgLink;
-                }
-                else tmp.ThumbnailLink = "http://i.imgur.com/ftNpsJS.jpg";
+                tmp.ThumbnailLink = tmpImg != null ? tmpImg.ImgLink : "http://i.imgur.com/ftNpsJS.jpg";
                 dt.Add(tmp);
             });
             return dt;
@@ -43,6 +39,7 @@ namespace DatieAPI.Controllers
         {
             var tmpData = DatieDb.tbl_Shop.FirstOrDefault(x => x.id_shop == id);
             var imgList = ImageLink(id);
+            var cmt = Comment(id);
             if (imgList.Count == 0)
             {
                 var tmp = new ImageModel
@@ -52,26 +49,26 @@ namespace DatieAPI.Controllers
                 };
                 imgList.Add(tmp);
             }
-            if (tmpData != null)
+            if (tmpData == null) return null;
+            var model = new DatieModel
             {
-                var model = new DatieModel
-                {
-                    ShopId = tmpData.id_shop.ToString(),
-                    ShopAddress = tmpData.address,
-                    ShopDescription = tmpData.description,
-                    ShopIsDeleted = tmpData.isDelete,
-                    ShopName = tmpData.name,
-                    ShopPhone = tmpData.phone,
-                    ShopPriceMid = tmpData.price_medium.ToString(),
-                    ShopRate = tmpData.averageRate.ToString(CultureInfo.CurrentCulture),
-                    ShopTimeMid = tmpData.time_medium.ToString(),
-                    Image = imgList,
-                    District = DistrictName(tmpData.id_district),
-                    Food = FoodName(tmpData.id_food)
-                };
-                return model;
-            }
-            return null;
+                ShopId = tmpData.id_shop.ToString(),
+                ShopAddress = tmpData.address,
+                ShopDescription = tmpData.description,
+                ShopIsDeleted = tmpData.isDelete,
+                ShopName = tmpData.name,
+                ShopPhone = tmpData.phone,
+                ShopPriceMid = tmpData.price_medium.ToString(),
+                ShopRate = tmpData.averageRate.ToString(CultureInfo.CurrentCulture),
+                ShopTimeMid = tmpData.time_medium.ToString(),
+                Lat = tmpData.latitude,
+                Lon = tmpData.longitude,
+                Image = imgList,
+                District = DistrictName(tmpData.id_district),
+                Food = FoodName(tmpData.id_food),
+                Commment = cmt
+            };
+            return model;
         }
 
         public string DistrictName(int id)
@@ -92,17 +89,33 @@ namespace DatieAPI.Controllers
             var imgList = new List<ImageModel>();
             data.ForEach(x =>
             {
-                if (!x.isDelete)
+                if (x.isDelete) return;
+                var tmp = new ImageModel
                 {
-                    var tmp = new ImageModel
-                    {
-                        ImgId = x.id_img,
-                        ImgLink = x.url_image
-                    };
-                    imgList.Add(tmp);
-                }
+                    ImgId = x.id_img,
+                    ImgLink = x.url_image
+                };
+                imgList.Add(tmp);
             });
             return imgList;
+        }
+
+        public List<CommentModel> Comment(int id)
+        {
+            var data = DatieDb.tbl_Comment.Where(x => x.id_shop == id).ToList();
+            var dt = new List<CommentModel>();
+            data.ForEach(x =>
+            {
+                var tmp = new CommentModel
+                {
+                    IdComment = x.id_cmt,
+                    Comment = x.comment,
+                    DateComment = x.date_cmt.ToShortDateString(),
+                    UserName = x.username
+                };
+                dt.Add(tmp);
+            });
+            return dt;
         }
     }
 }

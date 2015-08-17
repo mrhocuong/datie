@@ -1124,7 +1124,13 @@
     <Content Include="Content\DataTables\swf\copy_csv_xls.swf" />
     <Content Include="Content\DataTables\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\favicon.ico" />
-    <Content Include="Content\loading.gif" />
+    <Content Include="Content\Gallery\blueimp-gallery-indicator.css" />
+    <Content Include="Content\Gallery\blueimp-gallery-video.css" />
+    <Content Include="Content\Gallery\blueimp-gallery.css" />
+    <Content Include="Content\Gallery\blueimp-gallery.min.css" />
+    <Content Include="Content\Gallery\demo.css" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\play-pause.png" />
     <Content Include="Content\Material\material-fullpalette.css" />
     <Content Include="Content\Material\material-fullpalette.min.css" />
     <Content Include="Content\Material\material.css" />
@@ -1265,6 +1271,11 @@
     <Content Include="Scripts\Datatables\jquery.dataTables.min.js" />
     <Content Include="Scripts\Datatables\jquery.js" />
     <Content Include="Scripts\Datie\datie.js" />
+    <Content Include="Scripts\Gallery\blueimp-gallery.js" />
+    <Content Include="Scripts\Gallery\blueimp-gallery.min.js" />
+    <Content Include="Scripts\Gallery\demo.js" />
+    <Content Include="Scripts\Gallery\jquery.blueimp-gallery.js" />
+    <Content Include="Scripts\Gallery\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\jquery.base64img.js" />
     <Content Include="Scripts\Material\material.js" />
     <Content Include="Scripts\Material\material.min.js" />

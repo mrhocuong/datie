@@ -7,17 +7,25 @@ $(document).ready(function() {
             "dataType": "json"
         },
         "columns": [
+            { "data": "IdCmt" },
             { "data": "Username" },
             { "data": "IdShop" },
+            { "data": "NameShop" },
             { "data": "Comment" },
             { "data": "DateCmt" },
-             {
+            {
                  "data": function (data, type, full, meta) {
                      return " <button id=\"btnDelete\" class=\"btn btn-danger\" onclick=\"DeleteComment(this, event)\" data-id=\"" + data.IdCmt + "\" class=\"glyphicon glyphicon-edit\">Delete</button>";
                  }
-             }
+            }
         ],
-        "order": [[3, "desc"]]
+        "columnDefs": [
+           {
+               "targets": [0],
+               "visible": false
+           }
+        ],
+        "order": [[0, "desc"]]
     });
     $("#table_filter input").addClass("form-control input-sm");
     //  $("#table_length select").addClass("form-control");

@@ -9,7 +9,7 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Edit Shop Detail</h4>
             </div>
-            <fieldset id="editForm">
+            <form id="editForm">
                 <div class="modal-body">
                     <div class="editor-field">
                         @Html.TextBoxFor(x => x.ShopId, new {@type = "hidden"})
@@ -19,7 +19,7 @@
                             <label for="ShopName">Name</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control"})
+                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control", @required=true})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -101,12 +101,57 @@
                             }
                         </div>
                     </div>
+                    <div id="links" style="overflow-x: scroll; display: inline-block; width: 530px;">
+                        <div style="width: 1000px;">
+                            @for (int i = 0; i < Model.Image.Count(); i++)
+                            {
+                                <a href="@Model.Image[i].ImgLink" data-gallery>
+                                    <img src="@Model.Image[i].ImgLink" style="height: 90px; float: left; margin: 0px 0px 15px 15px;">
+                                </a>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick=" Edit(this, event) " data-id="@Model.ShopId">Update</button>
                 </div>
-            </fieldset>
+            </form>
         </div>
     </div>
 </div>
+
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('links').onclick = function (event) {
+        event = event || window.event;
+        var target = event.target || event.srcElement,
+            link = target.src ? target.parentNode : target,
+            options = { index: link, event: event },
+            links = this.getElementsByTagName('a');
+        blueimp.Gallery(links, options);
+    };
+
+    $("#editForm").validate({
+        rules: {
+        'ShopName': {
+            required: true
+        },
+        'ShopAddress': {
+            required: true
+        },
+        'ShopDescription': {
+            required: true
+        }
+            }
+    });
+</script>

@@ -83,13 +83,27 @@
                                 <input name="filesToUpload[]" id="Image" type="file" multiple="" />
                             </span>
                         </form>
-                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
-                    </div>
-                </fieldset>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
+                </div>
+            </fieldset>
         </div>
     </div>
+</div>
+
+<script>
+    $("#addForm").validate({
+        'ShopName': {
+            required: true
+        },
+        'ShopAddress': {
+            required: true
+        },
+        'ShopDescription': {
+            required: true
+        },
+    });
+</script>

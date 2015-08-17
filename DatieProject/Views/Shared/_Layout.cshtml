@@ -12,6 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico"/>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/bundles/MaterialCss")
+    @Styles.Render("~/bundles/Gallery")
     <style>
         li:hover {
             background-color: #dddddd;
@@ -48,7 +49,7 @@
 <div class="container body-content">
     @RenderBody()
 </div>
-<div class="navbar navbar-default navbar-fixed-bottom">
+<div id="nav-bottom" class="navbar navbar-default navbar-fixed-bottom">
     <center style="margin-top: 16px">
         <p>&copy; @DateTime.Now.Year - Datie Management (c) - CuongHH - ThaiTC - ThienNLH - Class SE0870A - SAD</p>
     </center>
@@ -60,7 +61,19 @@
 @Scripts.Render("~/bundles/bootbox")
 @Scripts.Render("~/bundles/numberic")
 @Scripts.Render("~/bundles/Material")
+@Scripts.Render("~/bundles/GalleryBody")
+@Scripts.Render("~/bundles/jqueryval")
 @RenderSection("scripts", false)
-
+<script type="text/javascript">
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+            console.log('end');
+            $('#nav-bottom').addClass('hide');
+        } else {
+            console.log('not end');
+            $('#nav-bottom').removeClass('hide');
+        }
+    });
+</script>
 </body>
 </html>

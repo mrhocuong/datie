@@ -31,44 +31,42 @@ namespace DatieProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return RedirectToAction("Index", "Login");
+            var checkLogin =
+                _datieDb.tbl_User.ToList()
+                    .Find(x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
+            var user = new ApplicationUser();
+            if (checkLogin != null)
             {
-                var checkLogin =
-                    _datieDb.tbl_User.ToList()
-                        .Find(x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
-                var user = new ApplicationUser();
-                if (checkLogin != null)
+                if (checkLogin.isAdmin)
                 {
-                    if (checkLogin.isAdmin)
+                    if (checkLogin.isActive)
                     {
-                        if (checkLogin.isActive)
+                        var info = new Info
                         {
-                            var info = new Info
-                            {
-                                Username = checkLogin.username,
-                                IsAdmin = checkLogin.isAdmin,
-                                IsActive = checkLogin.isActive,
-                                IsAdminMaster = checkLogin.admin_master
-                            };
-                            user.Info = info;
-                            Session["User"] = user;
-                            return RedirectToLocal(returnUrl);
-                        }
-                        else
-                        {
-                            Session["Error"] = "This account is deactivated!";
-                        }
+                            Username = checkLogin.username,
+                            IsAdmin = checkLogin.isAdmin,
+                            IsActive = checkLogin.isActive,
+                            IsAdminMaster = checkLogin.admin_master
+                        };
+                        user.Info = info;
+                        Session["User"] = user;
+                        return RedirectToLocal(returnUrl);
                     }
                     else
                     {
-                        Session["Error"] = "This account don't have permission to login!";
+                        Session["Error"] = "This account is deactivated!";
                     }
-                   
                 }
                 else
                 {
-                    Session["Error"] = "Invalid username or password. Try Again!";
+                    Session["Error"] = "This account don't have permission to login!";
                 }
+                   
+            }
+            else
+            {
+                Session["Error"] = "Invalid username or password. Try Again!";
             }
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Index", "Login");

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace DatieAPI
 {
@@ -15,6 +16,8 @@ namespace DatieAPI
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.Filters.Add(new AddCustomHeaderFilter());
         }
+     
+
     }
     public class AddCustomHeaderFilter : ActionFilterAttribute
     {

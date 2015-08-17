@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using DatieAPI.Models;
 
@@ -22,7 +23,7 @@ namespace DatieAPI.Controllers
                     IdShop = x.id_shop,
                     UserName = x.username,
                     Comment = x.comment,
-                    DateComment = x.date_cmt
+                    DateComment = x.date_cmt.ToShortDateString()
                 };
                 dt.Add(tmp);
             });
@@ -31,24 +32,17 @@ namespace DatieAPI.Controllers
 
         public bool PostComment(CommentModel model)
         {
-            if (model != null)
+            if (model == null) return false;
+            var dt = new tbl_Comment
             {
-                var dt = new tbl_Comment
-                {
-                    id_shop = model.IdShop,
-                    username = model.UserName,
-                    comment = model.Comment,
-                    date_cmt = DateTime.Now
-                };
-                DatieDb.tbl_Comment.Add(dt);
-                var check = DatieDb.SaveChanges();
-                if (check > 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+                id_shop = model.IdShop,
+                username = model.UserName,
+                comment = model.Comment,
+                date_cmt = DateTime.Now
+            };
+            DatieDb.tbl_Comment.Add(dt);
+            var check = DatieDb.SaveChanges();
+            return check > 0;
         }
     }
 }
