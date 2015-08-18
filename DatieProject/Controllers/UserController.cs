@@ -22,7 +22,7 @@ namespace DatieProject.Controllers
             var dt = new List<UserModel>();
             data.ForEach(x =>
             {
-                if (x.admin_master != false) return;
+                if (x.admin_master) return;
                 var tmp = new UserModel
                 {
                     Username = x.username,

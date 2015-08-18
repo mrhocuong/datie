@@ -55,7 +55,7 @@ namespace DatieProject.Controllers
             };
             _datieDb.tbl_Shop.Add(data);
             var check = _datieDb.SaveChanges();
-            return Json(check > 0 ? new { success = true } : new { success = false }, JsonRequestBehavior.AllowGet);
+            return Json(check > 0 ? new {success = true} : new {success = false}, JsonRequestBehavior.AllowGet);
         }
 
         public bool UploadImage(HttpPostedFileBase file)
@@ -74,7 +74,7 @@ namespace DatieProject.Controllers
             var uploadRequestString = "client_id" + apiKey + "client_secret" + apiSecret + "&title=" + "imageTitle" +
                                       "&caption=" + "img" + "&image=" + sb;
 
-            var webRequest = (HttpWebRequest)WebRequest.Create("https://api.imgur.com/3/upload.xml");
+            var webRequest = (HttpWebRequest) WebRequest.Create("https://api.imgur.com/3/upload.xml");
             //Authorization with project ID
             webRequest.Headers.Add("Authorization", "Client-ID e8d2e289bf6fbba");
             webRequest.Method = "POST";
@@ -97,6 +97,7 @@ namespace DatieProject.Controllers
             var txtLink = regex.Match(responseString).Groups[1].ToString();
             return true;
         }
+
         #endregion
 
         #region Edit
@@ -228,6 +229,7 @@ namespace DatieProject.Controllers
             });
             return imgList;
         }
+
         #endregion
     }
 }

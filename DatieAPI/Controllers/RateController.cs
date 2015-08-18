@@ -62,7 +62,7 @@ namespace DatieAPI.Controllers
             point = point/data.Count;
             var shop = DatieDb.tbl_Shop.ToList().Find(x => x.id_shop == id);
             if (shop == null) return false;
-            shop.averageRate = Math.Round(point,1);
+            shop.averageRate = Math.Round(point, 1);
             DatieDb.Entry(shop).State = EntityState.Modified;
             var check = DatieDb.SaveChanges();
             return check > 0;

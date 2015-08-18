@@ -13,10 +13,12 @@ namespace DatieProject.Controllers
         {
             return View();
         }
+
         public ActionResult HomePage()
         {
             return View();
         }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -53,16 +55,12 @@ namespace DatieProject.Controllers
                         Session["User"] = user;
                         return RedirectToLocal(returnUrl);
                     }
-                    else
-                    {
-                        Session["Error"] = "This account is deactivated!";
-                    }
+                    Session["Error"] = "This account is deactivated!";
                 }
                 else
                 {
                     Session["Error"] = "This account don't have permission to login!";
                 }
-                   
             }
             else
             {

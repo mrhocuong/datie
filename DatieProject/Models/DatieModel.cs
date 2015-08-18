@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace DatieProject.Models
 {
@@ -20,10 +18,10 @@ namespace DatieProject.Models
         public IEnumerable<DistrictModel> DistrictList { get; set; }
         public IEnumerable<FoodModel> Food { get; set; }
         public string[] ImgCollection { get; set; }
-        public IEnumerable<ImageModel> Image { get; set; }
+        public List<ImageModel> Image { get; set; }
     }
 
-      public class ImageModel
+    public class ImageModel
     {
         public int ImgId { get; set; }
         public string ImgLink { get; set; }

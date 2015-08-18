@@ -1,6 +1,6 @@
 ﻿@model DatieProject.Models.DatieModel
 
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="top:-27px">
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="top: -27px">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,7 +19,7 @@
                             <label for="ShopName">Name</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control", @required=true})
+                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control", @required = true})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -27,7 +27,7 @@
                             <label for="ShopAddress">Address</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopAddress, new { @style = "width:400px", @class = "form-control", @required = true })
+                            @Html.TextBoxFor(x => x.ShopAddress, new {@style = "width:400px", @class = "form-control", @required = true})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -75,7 +75,7 @@
                             <label for="ShopDescription">Description</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(x => x.ShopDescription, new { @style = "height:60px;width:400px;", @class = "form-control", @required = true })
+                            @Html.TextAreaFor(x => x.ShopDescription, new {@style = "height:60px;width:400px;", @class = "form-control", @required = true})
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -101,12 +101,12 @@
                             }
                         </div>
                     </div>
-                    <div id="links" style="overflow-x: scroll; display: inline-block; width: 530px;">
+                    <div id="links" style="display: inline-block; overflow-x: scroll; width: 530px;">
                         <div style="width: 1000px;">
-                            @for (int i = 0; i < Model.Image.Count(); i++)
+                            @for (var i = 0; i < Model.Image.Count(); i++)
                             {
                                 <a href="@Model.Image[i].ImgLink" data-gallery>
-                                    <img src="@Model.Image[i].ImgLink" style="height: 70px; float: left; margin: 0px 0px 15px 15px;">
+                                    <img src="@Model.Image[i].ImgLink" style="float: left; height: 70px; margin: 0px 0px 15px 15px;">
                                 </a>
                             }
                         </div>
@@ -132,12 +132,12 @@
 </div>
 
 <script type="text/javascript">
-    document.getElementById('links').onclick = function (event) {
+    document.getElementById("links").onclick = function(event) {
         event = event || window.event;
         var target = event.target || event.srcElement,
             link = target.src ? target.parentNode : target,
             options = { index: link, event: event },
-            links = this.getElementsByTagName('a');
+            links = this.getElementsByTagName("a");
         blueimp.Gallery(links, options);
     };
 </script>

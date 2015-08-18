@@ -1,5 +1,5 @@
 ﻿var progress;
-$(document).ready(function () {
+$(document).ready(function() {
     window.dt = $("#table").DataTable({
         "ajax": {
             "url": "User/GetData",
@@ -72,10 +72,10 @@ $(document).ready(function () {
         ]
     });
     $("#table_filter input").addClass("form-control input-sm");
-  //  $("#table_length select").addClass("form-control");
-    $('#li2').addClass('active');
-    $('#li1').removeClass('active');
-    $('#li3').removeClass('active');
+    //  $("#table_length select").addClass("form-control");
+    $("#li2").addClass("active");
+    $("#li1").removeClass("active");
+    $("#li3").removeClass("active");
 });
 
 function Active(btn, event) {
@@ -90,10 +90,9 @@ function Active(btn, event) {
         },
         success: function(data) {
             if (data.success == false) {
-               
-                $.notify("You do not have permission.", 'error', { position: "top center" });
+                $.notify("You do not have permission.", "error", { position: "top center" });
             } else {
-                $.notify("Change status of account successful", 'success', { position: "top center"});
+                $.notify("Change status of account successful", "success", { position: "top center" });
             }
             dt.ajax.reload(null, false);
         },
@@ -120,9 +119,9 @@ function ChangeRole(btn, event) {
         },
         success: function(data) {
             if (data.success == false) {
-                $.notify("You do not have permission.", 'error', { position: "top center" });
+                $.notify("You do not have permission.", "error", { position: "top center" });
             } else {
-                $.notify("Change role of account successful", 'success', { position: "top center" });
+                $.notify("Change role of account successful", "success", { position: "top center" });
             }
             dt.ajax.reload(null, false);
         },
@@ -140,11 +139,11 @@ function toggleChangeRole(btn) {
 function StartProcessBar() {
     $.blockUI();
     $("#processBar").removeClass("hide");
-    progress = setInterval(function () {
+    progress = setInterval(function() {
         var $bar = $("#process");
         if ($bar.width() >= 1300) {
             clearInterval(progress);
-            $('.progress').removeClass('active');
+            $(".progress").removeClass("active");
         } else {
             $bar.width($bar.width() + 550);
         }
@@ -153,7 +152,7 @@ function StartProcessBar() {
 
 function EndProcessBar() {
     clearInterval(progress);
-    $('.progress').removeClass('active');
+    $(".progress").removeClass("active");
     $("#process").removeAttr("style");
     $("#processBar").addClass("hide");
     $.unblockUI();

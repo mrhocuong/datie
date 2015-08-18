@@ -66,7 +66,7 @@ function EditShop(btn, event) {
 }
 
 function Edit(btn, event) {
-    var check = $('#editForm').valid();
+    var check = $("#editForm").valid();
     if (check) {
         var model = $("#editForm").serialize();
         //get status checked of checkbox
@@ -84,14 +84,14 @@ function Edit(btn, event) {
             success: function(data) {
                 EndProcessBar();
                 if (data.success) {
-                    $.notify("Edit data success.", 'success', { position: "top center" });
+                    $.notify("Edit data success.", "success", { position: "top center" });
                 } else {
-                    $.notify("Edit data fail. Try Again!", 'error', { position: "top center" });
+                    $.notify("Edit data fail. Try Again!", "error", { position: "top center" });
                 }
                 dt.ajax.reload(null, false);
             }
         });
-    } 
+    }
 }
 
 function AddShop(btn, event) {
@@ -119,7 +119,7 @@ function AddShop(btn, event) {
 }
 
 function Add(btn, event) {
-    var check = $('#addForm').valid();
+    var check = $("#addForm").valid();
     if (check) {
         var model = $("#addForm").serializeArray();
         var data = [];
@@ -129,22 +129,22 @@ function Add(btn, event) {
         for (var x = 0; x < input.files.length; x++) {
             //add to list
             var FR = new FileReader();
-            FR.onload = function (e) {
+            FR.onload = function(e) {
                 console.debug(x);
                 var encoded = e.target.result;
                 data.push({ ImgId: x, ImgLink: encoded });
             };
             FR.readAsDataURL(input.files[x]);
         };
-        console.debug('data image' + JSON.stringify(data));
-        var jsonObj = { 'name': 'Image', 'value': data };
-        console.debug('jsonObject' + JSON.stringify(jsonObj));
+        console.debug("data image" + JSON.stringify(data));
+        var jsonObj = { 'name': "Image", 'value': data };
+        console.debug("jsonObject" + JSON.stringify(jsonObj));
         model.push(jsonObj);
         console.debug(model);
         $.ajax({
             url: "Datie/Add",
             type: "POST",
-            datatype: 'json',
+            datatype: "json",
             data: model,
             beforeSend: function() {
                 $("#AddModal").modal("hide");
@@ -152,9 +152,9 @@ function Add(btn, event) {
             },
             success: function(data) {
                 if (data.success) {
-                    $.notify("Add data success.", 'success', { position: "top center" });
+                    $.notify("Add data success.", "success", { position: "top center" });
                 } else {
-                    $.notify("Add data fail. Try Again!", 'error', { position: "top center" });
+                    $.notify("Add data fail. Try Again!", "error", { position: "top center" });
                 }
                 dt.ajax.reload(null, false);
             },
@@ -169,17 +169,17 @@ function AddImage() {
     var formData = new FormData();
     var image = document.getElementById("Image").files;
     for (var i = 0; i < image.length; i++) {
-        formData.append('file' + i, image[0]);
+        formData.append("file" + i, image[0]);
     }
     console.debug(formData);
     $.ajax({
         url: "Datie/AddImage",
         type: "POST",
         data: formData,
-        dataType: 'json',
+        dataType: "json",
         contentType: false,
         processData: false,
-        success: function (data) {
+        success: function(data) {
             return data.success;
         }
     });
