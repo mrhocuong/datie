@@ -1265,6 +1265,7 @@
     <Content Include="fonts\Material\RobotoDraftMedium.woff2" />
     <Content Include="fonts\Material\RobotoDraftRegular.woff" />
     <Content Include="fonts\Material\RobotoDraftRegular.woff2" />
+    <Content Include="Content\Datie-fn2.apk" />
     <None Include="Scripts\Jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Datatables\jquery.dataTables.js" />
     <Content Include="Scripts\Datatables\jquery.dataTables.min.js" />

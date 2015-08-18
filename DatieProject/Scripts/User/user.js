@@ -90,9 +90,10 @@ function Active(btn, event) {
         },
         success: function(data) {
             if (data.success == false) {
+               
                 $.notify("You do not have permission.", 'error', { position: "top center" });
             } else {
-                $.notify("Change status of account successful", 'success', { position: "top center" });
+                $.notify("Change status of account successful", 'success', { position: "top center"});
             }
             dt.ajax.reload(null, false);
         },

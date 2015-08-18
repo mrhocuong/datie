@@ -20,7 +20,7 @@ namespace DatieProject.Models
         public IEnumerable<DistrictModel> DistrictList { get; set; }
         public IEnumerable<FoodModel> Food { get; set; }
         public string[] ImgCollection { get; set; }
-        public List<ImageModel> Image { get; set; }
+        public IEnumerable<ImageModel> Image { get; set; }
     }
 
       public class ImageModel

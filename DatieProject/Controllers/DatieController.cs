@@ -37,10 +37,9 @@ namespace DatieProject.Controllers
 
 
         [HttpPost]
-        public JsonResult Add(DatieModel model, List<ImageModel> image)
+        public JsonResult Add(DatieModel model)
         {
-            var dt = _datieDb.tbl_Shop.ToList().Find(x => x.id_shop.ToString() == model.ShopId);
-            if (dt != null) return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            var myFile = Request.Files;
             var data = new tbl_Shop
             {
                 name = model.ShopName,

@@ -66,29 +66,32 @@ function EditShop(btn, event) {
 }
 
 function Edit(btn, event) {
-    var model = $("#editForm").serialize();
-    //get status checked of checkbox
-    var str1 = $("#ShopIsDeleted").map(function() { return this.id + "=" + this.checked; }).get().join("&");
-    if (str1 != "" && model != "") model += "&" + str1;
-    else model += str1;
-    $.ajax({
-        url: "Datie/EditShop",
-        type: "POST",
-        data: model,
-        beforeSend: function() {
-            $("#EditModal").modal("hide");
-            StartProcessBar();
-        },
-        success: function(data) {
-            EndProcessBar();
-            if (data.success) {
-                $.notify("Edit data success.", 'success', { position: "top center" });
-            } else {
-                $.notify("Edit data fail. Try Again!", 'error', { position: "top center" });
+    var check = $('#editForm').valid();
+    if (check) {
+        var model = $("#editForm").serialize();
+        //get status checked of checkbox
+        var str1 = $("#ShopIsDeleted").map(function() { return this.id + "=" + this.checked; }).get().join("&");
+        if (str1 != "" && model != "") model += "&" + str1;
+        else model += str1;
+        $.ajax({
+            url: "Datie/EditShop",
+            type: "POST",
+            data: model,
+            beforeSend: function() {
+                $("#EditModal").modal("hide");
+                StartProcessBar();
+            },
+            success: function(data) {
+                EndProcessBar();
+                if (data.success) {
+                    $.notify("Edit data success.", 'success', { position: "top center" });
+                } else {
+                    $.notify("Edit data fail. Try Again!", 'error', { position: "top center" });
+                }
+                dt.ajax.reload(null, false);
             }
-            dt.ajax.reload(null, false);
-        }
-    });
+        });
+    } 
 }
 
 function AddShop(btn, event) {
@@ -116,43 +119,50 @@ function AddShop(btn, event) {
 }
 
 function Add(btn, event) {
-    var model = $("#addForm").serializeArray();
-    var data = [];
-    //get the input and UL list
-    var input = document.getElementById("Image");
-    //for every file...
-    for (var x = 0; x < input.files.length; x++) {
-        //add to list
-        var FR = new FileReader();
-        FR.onload = function(e) {
-            var encoded = e.target.result;
-            data.push({ ImgId:x, ImgLink:encoded });
+    var check = $('#addForm').valid();
+    if (check) {
+        var model = $("#addForm").serializeArray();
+        var data = [];
+        //get the input and UL list
+        var input = document.getElementById("Image");
+        //for every file...
+        for (var x = 0; x < input.files.length; x++) {
+            //add to list
+            var FR = new FileReader();
+            FR.onload = function (e) {
+                console.debug(x);
+                var encoded = e.target.result;
+                data.push({ ImgId: x, ImgLink: encoded });
+            };
+            FR.readAsDataURL(input.files[x]);
         };
-        FR.readAsDataURL(input.files[x]);
-    };
-    //model.push({ "ImgCollection": data });
-    console.debug(model);
-    $.ajax({
-        url: "Datie/Add",
-        type: "POST",
-        datatype:'json',
-        data: JSON.stringify({ model: model, image: data }),
-        beforeSend: function() {
-            $("#AddModal").modal("hide");
-            StartProcessBar();
-        },
-        success: function(data) {
-            if (data.success) {
-                $.notify("Add data success.", 'success', { position: "top center" });
-            } else {
-                $.notify("Add data fail. Try Again!", 'error', { position: "top center" });
+        console.debug('data image' + JSON.stringify(data));
+        var jsonObj = { 'name': 'Image', 'value': data };
+        console.debug('jsonObject' + JSON.stringify(jsonObj));
+        model.push(jsonObj);
+        console.debug(model);
+        $.ajax({
+            url: "Datie/Add",
+            type: "POST",
+            datatype: 'json',
+            data: model,
+            beforeSend: function() {
+                $("#AddModal").modal("hide");
+                StartProcessBar();
+            },
+            success: function(data) {
+                if (data.success) {
+                    $.notify("Add data success.", 'success', { position: "top center" });
+                } else {
+                    $.notify("Add data fail. Try Again!", 'error', { position: "top center" });
+                }
+                dt.ajax.reload(null, false);
+            },
+            complete: function() {
+                EndProcessBar();
             }
-            dt.ajax.reload(null, false);
-        },
-        complete: function() {
-            EndProcessBar();
-        }
-    });
+        });
+    }
 }
 
 function AddImage() {

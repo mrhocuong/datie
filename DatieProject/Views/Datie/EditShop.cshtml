@@ -1,6 +1,6 @@
 ﻿@model DatieProject.Models.DatieModel
 
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="top:-27px">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,7 @@
                             <label for="ShopAddress">Address</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopAddress, new {@style = "width:400px", @class = "form-control"})
+                            @Html.TextBoxFor(x => x.ShopAddress, new { @style = "width:400px", @class = "form-control", @required = true })
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -75,7 +75,7 @@
                             <label for="ShopDescription">Description</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(x => x.ShopDescription, new {@style = "height:120px;width:400px;", @class = "form-control"})
+                            @Html.TextAreaFor(x => x.ShopDescription, new { @style = "height:60px;width:400px;", @class = "form-control", @required = true })
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -106,7 +106,7 @@
                             @for (int i = 0; i < Model.Image.Count(); i++)
                             {
                                 <a href="@Model.Image[i].ImgLink" data-gallery>
-                                    <img src="@Model.Image[i].ImgLink" style="height: 90px; float: left; margin: 0px 0px 15px 15px;">
+                                    <img src="@Model.Image[i].ImgLink" style="height: 70px; float: left; margin: 0px 0px 15px 15px;">
                                 </a>
                             }
                         </div>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick=" Edit(this, event) " data-id="@Model.ShopId">Update</button>
+                    <button type="submit" class="btn btn-primary" onclick=" Edit(this, event) " data-id="@Model.ShopId">Update</button>
                 </div>
             </form>
         </div>
@@ -140,18 +140,4 @@
             links = this.getElementsByTagName('a');
         blueimp.Gallery(links, options);
     };
-
-    $("#editForm").validate({
-        rules: {
-        'ShopName': {
-            required: true
-        },
-        'ShopAddress': {
-            required: true
-        },
-        'ShopDescription': {
-            required: true
-        }
-            }
-    });
 </script>

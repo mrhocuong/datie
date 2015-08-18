@@ -9,14 +9,14 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Add New Shop</h4>
             </div>
-            <fieldset id="addForm">
+            <form id="addForm">
                 <div class="modal-body">
                     <div class="form-control-manual">
                         <div class="edit-label">
                             <label for="ShopName">Name</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopName, new {@style = "width:400px", @class = "form-control"})
+                            @Html.TextBoxFor(x => x.ShopName, new { @style = "width:400px", @class = "form-control", @required = true })
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -24,7 +24,7 @@
                             <label for="ShopAddress">Address</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.ShopAddress, new {@style = "width:400px", @class = "form-control"})
+                            @Html.TextBoxFor(x => x.ShopAddress, new { @style = "width:400px", @class = "form-control", @required = true })
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -64,7 +64,7 @@
                             <label for="ShopDescription">Description</label>
                         </div>
                         <div class="editor-field">
-                            @Html.TextAreaFor(x => x.ShopDescription, new {@style = "height:120px;width:400px;", @class = "form-control"})
+                            @Html.TextAreaFor(x => x.ShopDescription, new { @style = "height:120px;width:400px;", @class = "form-control", @required = true })
                         </div>
                     </div>
                     <div class="form-control-manual">
@@ -87,23 +87,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
+                    <button type="submit" class="btn btn-primary" onclick=" Add(this, event) ">Create</button>
                 </div>
-            </fieldset>
+            </form>
         </div>
     </div>
 </div>
-
-<script>
-    $("#addForm").validate({
-        'ShopName': {
-            required: true
-        },
-        'ShopAddress': {
-            required: true
-        },
-        'ShopDescription': {
-            required: true
-        },
-    });
-</script>
