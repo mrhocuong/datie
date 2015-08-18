@@ -76,6 +76,7 @@ function EndProcessBar() {
     clearInterval(progress);
     $(".progress").removeClass("active");
     $("#process").removeAttr("style");
+    $("#process").css('height', '2px');
     $("#processBar").addClass("hide");
     $.unblockUI();
 }
