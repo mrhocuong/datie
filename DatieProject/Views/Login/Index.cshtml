@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
     var session = Session["User"];
-    var error = Session["Error"];
+    var error = ViewBag.Error;
 }
 @model DatieProject.Models.LoginViewModel
 
@@ -53,7 +53,7 @@
                 <button class="close" data-dismiss="alert"></button>
                 <span>@error</span>
             </div>
-            Session["Error"] = null;
+            ViewBag.Error = null;
         }
 
         <div class="control-group">

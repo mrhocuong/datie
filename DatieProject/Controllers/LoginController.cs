@@ -35,8 +35,7 @@ namespace DatieProject.Controllers
         {
             if (!ModelState.IsValid) return RedirectToAction("Index", "Login");
             var checkLogin =
-                _datieDb.tbl_User.ToList()
-                    .Find(x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
+                _datieDb.tbl_User.FirstOrDefault(x => x.username.Equals(model.UserName) && x.password.Equals(model.Password));
             var user = new ApplicationUser();
             if (checkLogin != null)
             {
@@ -55,16 +54,16 @@ namespace DatieProject.Controllers
                         Session["User"] = user;
                         return RedirectToLocal(returnUrl);
                     }
-                    Session["Error"] = "This account is deactivated!";
+                    ViewBag.Error = "This account is deactivated!";
                 }
                 else
                 {
-                    Session["Error"] = "This account don't have permission to login!";
+                    ViewBag.Error = "This account don't have permission to login!";
                 }
             }
             else
             {
-                Session["Error"] = "Invalid username or password. Try Again!";
+                ViewBag.Error = "Invalid username or password. Try Again!";
             }
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Index", "Login");

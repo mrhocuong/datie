@@ -91,6 +91,7 @@ function Edit(btn, event) {
                 dt.ajax.reload(null, false);
             }
         });
+       
     }
 }
 
